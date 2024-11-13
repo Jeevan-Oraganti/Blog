@@ -19,7 +19,6 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
-        $attributes['password'] = bcrypt($attributes['password']);
 
         if (! auth()->attempt($attributes)) {
             throw ValidationException::withMessage([
@@ -28,7 +27,7 @@ class SessionsController extends Controller
         }
 
         session()->regenerate();
-        
+
         return redirect('/')->with('Success', 'Welcome Back');
 
     }
