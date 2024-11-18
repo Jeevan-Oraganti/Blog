@@ -24,14 +24,13 @@
                 @enderror
             </div>
             <div class="mt-4 rounded-xl text-center border-t border-gray-200 pt-4">
-                <x-form.submit-button>Post</x-form.submit-button>
+                <x-form.button>Post</x-form.submit-button>
             </div>
         </form>
     </x-panel>
 @else
     <p class="font-semibold text-center text-gray-700">
         <a href="/register" class="text-blue-500">Register</a> or <a href="/login"
-                                                                     class="text-blue-500">Log in</a> to
-        leave a comment.
+                                                                     class="text-blue-500">Log in</a> to leave a comment.
     </p>
 @endauth
