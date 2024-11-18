@@ -7,10 +7,14 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PostCommentsController;
+use Illuminate\Container\Attributes\DB;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
+
+Route::get('blogs', [PostController::class, 'blogs']);
+Route::get('blogs/id={post}', [PostController::class, 'blogsOpen']);
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
@@ -31,6 +35,7 @@ Route::post('contact', [ContactController::class, 'store']);
 Route::middleware('can:admin')->group(function () {
     Route::get('admin/posts', [AdminPostController::class, 'index']);
     Route::post('admin/posts', [AdminPostController::class, 'store']);
+    Route::get('admin/contacts', [AdminPostController::class, 'contacts']);
     Route::get('admin/posts/create', [AdminPostController::class, 'create']);
     Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
     Route::patch('admin/posts/{post}', [AdminPostController::class, 'update']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Post;
+use App\Models\User;
 use \Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
@@ -23,4 +24,22 @@ class PostController extends Controller
             'post' => $post
         ]);
     }
+    public function blogs()
+    {
+        $posts = Post::all();
+        $users = User::when(request('id'), function ($query) {
+            return $query->where('id', (int) request('id'));
+        })->get();
+
+
+        return view('components.blog.view', compact('posts', 'users'));
+    }
+
+    public function blogsOpen(Post $post)
+    {
+        return view('components.blog.show', [
+            'post' => $post
+        ]);
+    }
+
 }

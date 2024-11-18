@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -22,7 +23,7 @@ class AdminPostController extends Controller
 
     public function store()
     {
-        Post::create(array_merge($this->validatePost(),[
+        Post::create(array_merge($this->validatePost(), [
             'user_id' => request()->user()->id,
             'thumbnail' => request()->file('thumbnail')->store('thumbnails', 'public')
         ]));
@@ -55,6 +56,12 @@ class AdminPostController extends Controller
         $post->delete();
 
         return back()->with('success', 'Post Deleted');
+    }
+
+    public function contacts()
+    {
+        $contacts = Contact::all();
+        return view('admin.contacts', ['contacts' => $contacts]);
     }
 
     /**
