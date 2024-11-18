@@ -18,28 +18,32 @@
 </head>
 
 <body style="font-family: Open Sans, sans-serif">
-    <section class="px-6 py-8">
+<section class="px-6 py-8">
 
-        <nav class="md:flex md:justify-between md:items-center">
+    <nav class="md:flex md:justify-between md:items-center">
 
-            <div>
-                <a href="/" class="home-icon">
-                    <i class="fa-solid fa-house fa-2x ml-4 text-blue-500 hover:text-blue-600"></i>
-                </a>
-            </div>
+        <div>
+            <a href="/" class="home-icon">
+                <i class="fa-solid fa-house fa-2x ml-4 text-blue-500 hover:text-blue-600"></i>
+            </a>
+        </div>
 
-            <div class="mt-8 md:mt-0 flex items-center">
-                @auth
+        <div class="mt-8 md:mt-0 flex items-center">
+            @auth
                 <x-dropdown>
                     <x-slot name="trigger">
                         <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</button>
                     </x-slot>
 
-                    <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
-                    <x-dropdown-item href="/admin/posts/create" :active="request()->Is('admin/posts/create')">New Post
-                    </x-dropdown-item>
+                    @admin
+                        <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->Is('admin/posts/create')">New
+                            Post
+                        </x-dropdown-item>
+                    @endadmin
+
                     <x-dropdown-item href="#" x-data="{}"
-                        @click.prevent="document.querySelector('#logout-form').submit()">Log Out
+                                     @click.prevent="document.querySelector('#logout-form').submit()">Log Out
                     </x-dropdown-item>
 
                     <form id="logout-form" method="POST" action="/logout" class="hidden">
@@ -51,90 +55,94 @@
                 <a href="/contact-us">
                     <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
                 </a>
-                @else
+            @else
 
                 <a href="/register" class="text-xs font-bold uppercase">Register</a>
                 <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>
                 <a href="/contact-us">
                     <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
                 </a>
-                @endauth
+            @endauth
 
 
-                <div x-data="{ open: false }" @click.away="open = false" class="relative">
-                    <button id="menu-toggle" @click="open = !open"
+            <div x-data="{ open: false }" @click.away="open = false" class="relative">
+                <button id="menu-toggle" @click="open = !open"
                         class="bg-blue-500 ml-4 rounded-full text-xs font-semibold text-white uppercase py-2 px-5 transition duration-300 ease-in-out transform hover:scale-105">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+                    <i class="fa-solid fa-bars"></i>
+                </button>
 
 
-                    <div id="menu" x-show="open" x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 transform scale-95"
-                        x-transition:enter-end="opacity-100 transform scale-100"
-                        x-transition:leave="transition ease-in duration-75"
-                        x-transition:leave-start="opacity-100 transform scale-100"
-                        x-transition:leave-end="opacity-0 transform scale-95"
+                <div id="menu" x-show="open" x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 transform scale-95"
+                     x-transition:enter-end="opacity-100 transform scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="opacity-100 transform scale-100"
+                     x-transition:leave-end="opacity-0 transform scale-95"
 
-                        class="absolute right-0 bg-white shadow-md rounded-lg mt-2 py-2 w-48">
+                     class="absolute right-0 bg-white shadow-md rounded-lg mt-2 py-2 w-48">
 
-
+                    @admin
                         <a href="/admin/posts"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out">Dashboard</a>
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out">Dashboard</a>
                         <a href="/admin/posts/create"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out">New Post</a>
-                        <a href="#newsletter"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out">Newsletter</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out" x-data="{}"
-                            @click.prevent="document.querySelector('#logout-form').submit()">Log Out
-                        </a>
-                    </div>
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out">New
+                            Post</a>
+                    @endadmin
+                    <a href="#newsletter"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out">Newsletter</a>
+                    <a href="#"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                       x-data="{}"
+                       @click.prevent="document.querySelector('#logout-form').submit()">Log Out
+                    </a>
                 </div>
             </div>
+        </div>
 
-        </nav>
-
-
-        {{$slot}}
+    </nav>
 
 
-        <footer id="newsletter"
+    {{$slot}}
+
+
+    <footer id="newsletter"
             class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
-            <img src="/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
-            <h5 class="text-3xl">Stay in touch with the latest posts</h5>
-            <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
+        <img src="/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
+        <h5 class="text-3xl">Stay in touch with the latest posts</h5>
+        <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
 
 
-            <div class="mt-10">
-                <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">
-                    <form method="POST" action="/newsletter" class="lg:flex text-sm">
-                        @csrf
-                        <div class="lg:py-3 lg:px-5 flex items-center">
-                            <label for="email" class="hidden lg:inline-block">
-                                <img src="/images/mailbox-icon.svg" alt="mailbox letter">
-                            </label>
-                            <div>
-                                <input id="email" name="email" type="text" placeholder="Your email address"
-                                    class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
+        <div class="mt-10">
+            <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">
+                <form method="POST" action="/newsletter" class="lg:flex text-sm">
+                    @csrf
+                    <div class="lg:py-3 lg:px-5 flex items-center">
+                        <label for="email" class="hidden lg:inline-block">
+                            <img src="/images/mailbox-icon.svg" alt="mailbox letter">
+                        </label>
+                        <div>
+                            <input id="email" name="email" type="text" placeholder="Your email address"
+                                   class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
 
-                                @error('email')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            @error('email')
+                            <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
+                    </div>
 
-                        <button type="submit"
+                    <button type="submit"
                             class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
+                        Subscribe
+                    </button>
+                </form>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-    </section>
+</section>
 
 
-    <x-flash />
+<x-flash/>
 </body>
 
 </html>
