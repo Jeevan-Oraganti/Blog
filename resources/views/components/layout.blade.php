@@ -18,9 +18,9 @@
 </head>
 
 <body style="font-family: Open Sans, sans-serif">
-    <section class="px-6 py-8">
-
-        <nav class="md:flex md:justify-between md:items-center bg-gray-900 p-4 shadow-2xl rounded-xl -mt-6 -mr-4 -ml-4 fixed top-8 left-6 right-6">
+<section class="flex flex-col px-6 py-8" style="min-height: 100vh">
+        <nav
+            class="md:flex md:justify-between md:items-center bg-gray-900 p-4 shadow-2xl rounded-xl -mt-6 -mr-4 -ml-4 fixed top-8 left-6 right-6 z-10">
 
             <div>
                 <a href="/" class="home-icon ml-4">
@@ -28,57 +28,98 @@
                 </a>
             </div>
 
+
+            <!-- Accessing from Database
+
             <div class="mt-8 md:mt-0 flex items-center mr-6">
                 @auth
-                <x-dropdown>
-                    <x-slot name="trigger">
-                        <button class="text-xs font-bold uppercase text-white">Welcome, {{ auth()->user()->name }}</button>
-                    </x-slot>
+                    <x-dropdown>
+                        <x-slot name="trigger">
+                            <button class="text-xs font-bold uppercase text-white">Welcome, {{ auth()->user()->name }}.
+                                Fetching from Database
+                            </button>
+                        </x-slot>
 
-                    @admin
-                    <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
-                    <x-dropdown-item href="/admin/posts/create" :active="request()->Is('admin/posts/create')">New
-                        Post
-                    </x-dropdown-item>
-                    @endadmin
+                        @foreach ($navItems as $item)
+                            @if (!$item->is_disabled)
+                                <a href="{{ $item->url }}"
+                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                   @if(isset($item->onclick)) @click.prevent="{{ $item->onclick }}" @endif>
+                                    <i class="{{ $item->icon_url }}"></i> {{ $item->name }}
+                                </a>
+                            @else
+                                <span class="block px-4 py-2 text-sm text-gray-700 cursor-not-allowed">
+                            <i class="{{ $item->icon_url }}"></i> {{ $item->name }}
+                        </span>
+                            @endif
+                        @endforeach
 
-                    <x-dropdown-item href="#" x-data="{}"
-                        @click.prevent="document.querySelector('#logout-form').submit()">Log Out
-                    </x-dropdown-item>
+                        <form id="logout-form" method="POST" action="/logout" class="hidden">
+                            @csrf
+                        </form>
+                    </x-dropdown>
+                @else
+                    <a href="/register" class="text-xs font-bold uppercase text-white">Register</a>
+                    <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>
+                    <a href="/contact-us">
+                        <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
+                    </a>
+                @endauth
+            </div> -->
 
-                    <form id="logout-form" method="POST" action="/logout" class="hidden">
-                        @csrf
-                    </form>
-                </x-dropdown>
+
+            <div class="mt-8 md:mt-0 flex items-center mr-6">
+                @auth
+                    <x-dropdown>
+                        <x-slot name="trigger">
+                            <button class="text-xs font-bold uppercase text-white">
+                                Welcome, {{ auth()->user()->name }}</button>
+                        </x-slot>
+
+                        @admin
+                        <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->Is('admin/posts/create')">New
+                            Post
+                        </x-dropdown-item>
+                        @endadmin
+
+                        <x-dropdown-item href="#" x-data="{}"
+                                         @click.prevent="document.querySelector('#logout-form').submit()">Log Out
+                        </x-dropdown-item>
+
+                        <form id="logout-form" method="POST" action="/logout" class="hidden">
+                            @csrf
+                        </form>
+                    </x-dropdown>
 
 
-                <a href="/contact-us">
-                    <i class="fas fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
-                </a>
+                    <a href="/contact-us">
+                        <i class="fas fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
+                    </a>
                 @else
 
-                <a href="/register" class="text-xs font-bold uppercase text-white">Register</a>
-                <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>
-                <a href="/contact-us">
-                    <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
-                </a>
+                    <a href="/register" class="text-xs font-bold uppercase text-white">Register</a>
+                    <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>
+                    <a href="/contact-us">
+                        <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
+                    </a>
                 @endauth
 
 
                 <div x-data="{ open: false }" @click.away="open = false" class="relative">
                     <button id="menu-toggle" @click="open = !open"
-                        class="bg-blue-500 ml-4 rounded-full text-xs font-semibold text-white uppercase py-2 px-5 transition duration-300 ease-in-out transform hover:scale-105">
+                            class="bg-blue-500 ml-4 rounded-full text-xs font-semibold text-white uppercase py-2 px-5 transition duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-bars"></i>
                     </button>
 
 
                     <div id="menu" x-show="open" x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 transform scale-95"
-                        x-transition:enter-end="opacity-100 transform scale-100"
-                        x-transition:leave="transition ease-in duration-75"
-                        x-transition:leave-start="opacity-100 transform scale-100"
-                        x-transition:leave-end="opacity-0 transform scale-95"
-                        class="absolute right-0 bg-white shadow-md rounded-lg mt-2 py-2 w-48">
+                         x-transition:enter-start="opacity-0 transform scale-95"
+                         x-transition:enter-end="opacity-100 transform scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="opacity-100 transform scale-100"
+                         x-transition:leave-end="opacity-0 transform scale-95"
+                         class="absolute right-0 bg-white shadow-md rounded-lg mt-2 py-2 w-48">
 
                         <?php
                         $navItems = [
@@ -92,16 +133,30 @@
                             [
                                 'name' => 'New Post',
                                 'url' => '/admin/posts/create',
-                                'is_disabled' => true,
+                                'is_disabled' => false,
+                                'icon_url' => 'fas fa-plus',
+                                'is_featured' => false,
+                            ],
+                            [
+                                'name' => 'All Posts',
+                                'url' => '/blogs',
+                                'is_disabled' => false,
                                 'icon_url' => 'fas fa-plus',
                                 'is_featured' => false,
                             ],
                             [
                                 'name' => 'Contacts',
                                 'url' => '/admin/contacts',
-                                'is_disabled' => false,
+                                'is_disabled' => true,
                                 'icon_url' => 'fas fa-phone-alt',
-                                'is_featured' => false,
+                                'is_featured' => true,
+                            ],
+                            [
+                                'name' => 'Navigation',
+                                'url' => '/navigation',
+                                'is_disabled' => false,
+                                'icon_url' => 'fas fa-bars',
+                                'is_featured' => true,
                             ],
                             [
                                 'name' => 'Newsletter',
@@ -125,11 +180,11 @@
                         ?>
 
                         @foreach ($navItems as $item)
-                        @if (!$item['is_disabled'])
-                        {!! sprintf($linkTemplate, $item['url'], isset($item['onclick']) ? '@click.prevent="'.$item['onclick'].'"' : '', $item['icon_url'], $item['name']) !!}
-                        @else
-                        {!! sprintf($spanTemplate, $item['icon_url'], $item['name']) !!}
-                        @endif
+                            @if (!$item['is_disabled'])
+                                {!! sprintf($linkTemplate, $item['url'], isset($item['onclick']) ? '@click.prevent="'.$item['onclick'].'"' : '', $item['icon_url'], $item['name']) !!}
+                            @else
+                                {!! sprintf($spanTemplate, $item['icon_url'], $item['name']) !!}
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -137,13 +192,14 @@
 
         </nav>
 
-
+    <div class="mb-10">
         {{$slot}}
+    </div>
 
-
+    <div class="flex mt-auto bottom-3 mx-1 w-full">
         <footer id="newsletter"
-            class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
-            <img src="/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
+                class="relative w-full bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-8 px-10 mt-auto">
+            <i class="fas fa-envelope mx-auto mb-6 text-blue-400 text-8xl" style="width: 200px;"></i>
             <h5 class="text-3xl">Stay in touch with the latest posts</h5>
             <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
 
@@ -158,7 +214,7 @@
                             </label>
                             <div>
                                 <input id="email" name="email" type="text" placeholder="Your email address"
-                                    class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
+                                       class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
 
                                 @error('email')
                                 <span class="text-xs text-red-500">{{ $message }}</span>
@@ -167,19 +223,18 @@
                         </div>
 
                         <button type="submit"
-                            class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
+                                class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
                             Subscribe
                         </button>
                     </form>
                 </div>
             </div>
         </footer>
+    </div>
+</section>
 
-    </section>
 
-
-
-    <x-flash />
+<x-flash/>
 </body>
 
 </html>

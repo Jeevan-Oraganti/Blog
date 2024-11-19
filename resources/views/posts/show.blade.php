@@ -59,5 +59,4 @@
         </article>
     </main>
 
-
 </x-layout>

@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PostCommentsController;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NavigationController;
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
@@ -41,3 +42,6 @@ Route::middleware('can:admin')->group(function () {
     Route::patch('admin/posts/{post}', [AdminPostController::class, 'update']);
     Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy']);
 });
+
+
+Route::get('/navigation', [NavigationController::class, 'index'])->name('navigation.index');

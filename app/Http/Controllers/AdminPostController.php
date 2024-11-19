@@ -60,7 +60,7 @@ class AdminPostController extends Controller
 
     public function contacts()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::latest()->get();
         return view('admin.contacts', ['contacts' => $contacts]);
     }
 

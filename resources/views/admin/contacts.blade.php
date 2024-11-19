@@ -21,9 +21,6 @@
             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                 Sent At
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                Status
-            </th>
         </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -57,12 +54,6 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">%s</div>
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                        <span
-                            class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                            Solved
-                        </span>
                     </td>
                 </tr>',
                     $rowClass,

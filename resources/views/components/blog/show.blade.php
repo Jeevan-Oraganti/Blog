@@ -4,7 +4,7 @@
         <thead class="bg-gray-50">
         <tr>
             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                No.
+                ID.
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                 Title
@@ -16,14 +16,14 @@
                 Category
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                Published At
+                Published On
             </th>
         </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
 
                 <?php
-                $rowClass = $post->id % 2 == 0 ? 'bg-white' : 'bg-gray-100';
+                $rowClass = $post->id + 1 % 2 == 0 ? 'bg-white' : 'bg-gray-100';
                 $row      = sprintf(
                     '<tr class="%s" onclick="window.location.href=\'/blogs?id=%d\'" style="cursor:pointer;">
                         <td class="px-6 py-4 whitespace-nowrap">
