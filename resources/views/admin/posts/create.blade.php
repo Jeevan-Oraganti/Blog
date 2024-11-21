@@ -1,6 +1,7 @@
+@php use App\Models\Category; @endphp
 <x-layout>
     <x-setting heading="Publish New Post">
-        <form method="POST" action="/admin/posts" enctype="multipart/form-data">
+        <form method="POST" action="/admin/post" enctype="multipart/form-data">
             @csrf
 
             <x-form.input name="title"/>
@@ -12,7 +13,7 @@
             <x-form.field>
                 <x-form.label name="category"/>
                 <select name="category_id" id="category_id">
-                    @foreach(\App\Models\Category::all() as $category)
+                    @foreach(Category::all() as $category)
                         <option
                             value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                             {{ ucwords($category->name) }}

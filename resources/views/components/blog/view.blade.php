@@ -1,5 +1,7 @@
 <x-layout>
-    <h1 class="mt-20 font-bold uppercase items-center">All Posts in a Table</h1>
+    <div class="mt-20 font-bold uppercase items-center text-blue-500">
+        <a href="/blog">All Posts in a Table</a>
+    </div>
     <table class="min-w-full divide-y divide-gray-200 mt-8">
         <thead class="bg-gray-50">
         <tr>
@@ -21,16 +23,18 @@
         </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-        <tbody class="bg-white divide-y divide-gray-200">
+        @php
+            $startingIndex = ($posts->currentPage() - 1) * $posts->perPage();
+        @endphp
         @foreach($posts as $index => $post)
             <tr class="{{ $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' }}"
                 onclick="window.location.href='/blogs/id={{ $post->id }}'" style="cursor:pointer;">
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $index + 1 }}</div>
+                    <div class="text-sm text-gray-900">{{ $startingIndex + $index + 1 }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-blue-500">
-                        <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
+                        <a href="/post/{{ $post->slug }}">{{ $post->title }}</a>
                         @if($post->isLatest())
                             <sup class="bg-blue-500 text-white text-base/4 px-1 py-0.5 rounded-full">
                                 New
@@ -40,12 +44,12 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-blue-500">
-                        <a href="/?authors={{ $post->author->name }}">{{ $post->author->name }}</a>
+                        <a href="{{ url()->current() }}/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
                     </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-blue-500">
-                        <a href="/?category={{ $post->category->slug }}">{{ $post->category->name }}</a>
+                        <a href="{{ url()->current() }}/?category={{ $post->category->slug }}">{{ $post->category->name }}</a>
                     </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -54,50 +58,38 @@
             </tr>
         @endforeach
         </tbody>
-        <!-- @foreach($posts as $index => $post)
-                <?php
-                $rowClass = $index % 2 == 0 ? 'bg-white' : 'bg-gray-100';
-                $row      = sprintf(
-                    '<tr class="%s" onclick="window.location.href=\'/blogs/id=%d\'" style="cursor:pointer;">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">%d</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-blue-500">
-                                <a href="/posts/%s">%s</a>
-                                @if($post->isLatest())
-                                <sup>New</sup>
-                                @endif
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-blue-500">
-                                <a href="/?authors=%s">%s</a>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-blue-500">
-                                <a href="/?category=%s&">%s</a>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">%s</div>
-                        </td>
-                    </tr>',
-                    $rowClass,
-                    $post->id,
-                    $index + 1,
-                    $post->slug,
-                    $post->title,
-                    $post->author->name,
-                    $post->author->name,
-                    $post->category->slug,
-                    $post->category->name,
-                    $post->created_at->format('M d, Y')
-                );
-                echo $row;
-                ?>
-        @endforeach -->
-        </tbody>
     </table>
+    <div class="mt-6">
+        {{ $posts->links() }}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @php
+            $startingIndex = ($posts->currentPage() - 1) * $posts->perPage();
+        @endphp
+
+        @foreach ($posts as $index => $post)
+            <div class="p-6 rounded-lg shadow-lg mt-20 relative"
+                 style="background-image: url('{{ asset('storage/' . $post->thumbnail) }}'); background-size: cover; background-position: center;"
+                 class="rounded-lg">
+                <div class="overlay absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 rounded-lg"></div>
+                <div class="relative z-10 text-white">
+                    <h2 class="text-balance font-semibold tracking-tight text-white-900">{{ $startingIndex + $index + 1 }}.
+                        <a href="/post/{{ $post->slug }}">{{ $post->title }}</a>
+                        @if($post->isLatest())
+                            <sup class="bg-blue-500 text-white text-base/4 px-1 py-0.5 rounded-full z-10">
+                                New
+                            </sup>
+                        @endif
+                    </h2>
+                    <p class="text-white mt-2">{!! $post->excerpt !!}</p>
+                    <h1 class="text-xl font-bold mt-2"><a
+                            href="{{ url()->current() }}/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
+                    </h1>
+                    <a href="/posts/{{ $post->slug }}" class="text-blue-500 hover:underline mt-2">Read more</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
 </x-layout>

@@ -15,7 +15,7 @@
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-4">
-                                            <a href="/posts/{{ $post->slug }}">
+                                            <a href="/post/{{ $post->slug }}">
                                                 <div
                                                     class="font-medium text-blue-500 hover:text-blue-600">{{ $post->title }}</div>
                                             </a>
@@ -25,12 +25,6 @@
                                         <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="thumbnail"
                                              class="w-10 h-10">
                                     </td>
-                                    <!-- <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                        <span
-                                            class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                                            Published
-                                        </span>
-                                    </td> -->
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <a href="/admin/posts/{{ $post->id }}/edit"
                                            class="text-blue-500 hover:text-blue-600">
@@ -40,7 +34,7 @@
                                         </a>
                                     </td>
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <form method="POST" action="/admin/posts/{{ $post->id }}">
+                                        <form method="POST" action="/admin/post/{{ $post->id }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-600">Delete
@@ -54,6 +48,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mt-6">
+            {{ $posts->links() }}
         </div>
 
     </x-setting>

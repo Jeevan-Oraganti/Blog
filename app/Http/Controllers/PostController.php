@@ -14,7 +14,7 @@ class PostController extends Controller
         return view('posts.index', [
             'posts' => Post::latest()->filter(
                 request(['search', 'category', 'author'])
-            )->paginate(3)->withQueryString()
+            )->paginate(6)->withQueryString()
         ]);
     }
 
@@ -24,12 +24,15 @@ class PostController extends Controller
             'post' => $post
         ]);
     }
-    public function blogs()
+    public function blog()
     {
-        $posts = Post::all();
         $users = User::when(request('id'), function ($query) {
             return $query->where('id', (int) request('id'));
         })->get();
+
+        $posts = Post::latest()->filter(
+            request(['search', 'category', 'author'])
+        )->paginate(20)->withQueryString();
 
 
         return view('components.blog.view', compact('posts', 'users'));

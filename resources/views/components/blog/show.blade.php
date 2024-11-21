@@ -25,7 +25,7 @@
                 <?php
                 $rowClass = $post->id + 1 % 2 == 0 ? 'bg-white' : 'bg-gray-100';
                 $row      = sprintf(
-                    '<tr class="%s" onclick="window.location.href=\'/blogs?id=%d\'" style="cursor:pointer;">
+                    '<tr class="%s" onclick="window.location.href=\'/blog?id=%d\'" style="cursor:pointer;">
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-900">%d</div>
                         </td>
@@ -36,7 +36,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-blue-500">
-                                <a href="/?authors=%s">%s</a>
+                                <a href="/?author=%s">%s</a>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">

@@ -5,14 +5,14 @@
     </h1>
 
     <div class="flex">
-        <aside class="w-48 flex-shrink-0">
+        <aside class="w-40 flex-shrink-0">
             <h4 class="font-semibold mb-6">Links</h4>
             <ul>
                 <li class="mb-2">
                     <a href="/admin/posts" class="{{ request()->is('admin/posts') ? 'text-blue-500' : '' }}">All Posts</a>
                 </li>
                 <li>
-                    <a href="/admin/posts/create" class="{{ request()->is('admin/posts/create') ? 'text-blue-500' : '' }}">New Post</a>
+                    <a href="/admin/post/create" class="{{ request()->is('admin/post/create') ? 'text-blue-500' : '' }}">New Post</a>
                 </li>
             </ul>
         </aside>
