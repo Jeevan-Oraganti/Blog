@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
@@ -64,8 +64,16 @@ class AdminPostController extends Controller
 
     public function contacts()
     {
-        $contacts = Contact::latest()->get();
+        $contacts = Contact::latest()->filter([
+            'search' => request('search')]
+        )->paginate(10)->withQueryString();
+
         return view('admin.contacts', ['contacts' => $contacts]);
+    }
+
+    public function isLatest()
+    {
+        return $this->created_at->gt(Carbon::now()->subDays(1));
     }
 
     /**
