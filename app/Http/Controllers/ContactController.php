@@ -1,13 +1,14 @@
 <?php
-// app/Http/Controllers/ContactController.php
+
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function contact()
+    public function index()
     {
         return view('contact.contact-us');
     }

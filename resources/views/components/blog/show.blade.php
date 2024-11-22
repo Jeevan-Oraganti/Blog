@@ -64,6 +64,6 @@
         </tbody>
     </table>
     <nav class="mt-6">
-        <a href="/blogs" class="text-blue-500">Blogs<sup>All</sup></a>
+        <a href="/blog" class="text-blue-500">Blogs<sup>All</sup></a>
     </nav>
 </x-layout>

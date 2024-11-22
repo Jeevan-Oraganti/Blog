@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+    x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }"
+    :class="{ 'dark': darkMode }"
+    x-init="$watch('darkMode', value => localStorage.setItem('darkMode', value))">
+
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> <!-- Use CDN for Tailwind CSS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -17,10 +21,10 @@
     </style>
 </head>
 
-<body style="font-family: Open Sans, sans-serif">
+<body class="font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100" style="font-family: Open Sans, sans-serif">
     <section class="flex flex-col px-6 py-8" style="min-height: 100vh">
         <nav
-            class="md:flex md:justify-between md:items-center bg-gray-900 p-4 shadow-2xl rounded-xl -mt-6 -mr-4 -ml-4 fixed top-8 left-6 right-6 z-50">
+            class="md:flex md:justify-between md:items-center bg-gray-900 dark:bg-gray-800 p-4 shadow-2xl rounded-xl -mt-6 -mr-4 -ml-4 fixed top-8 left-6 right-6 z-50">
 
             <div>
                 <a href="/" class="home-icon ml-4">
@@ -41,6 +45,13 @@
             </div>
 
 
+{{--            <div class="mt-8 md:mt-0 flex items-center">--}}
+{{--                <button @click="darkMode = !darkMode; console.log(darkMode)" class="bg-blue-500 text-white px-4 py-2 rounded-full">--}}
+{{--                    Dark Mode--}}
+{{--                </button>--}}
+{{--            </div>--}}
+
+
             <div class="mt-8 md:mt-0 flex items-center mr-6">
                 @auth
                 <x-dropdown>
@@ -51,7 +62,7 @@
 
                     @admin
                     <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
-                    <x-dropdown-item href="/admin/posts/create" :active="request()->Is('admin/posts/create')">New
+                    <x-dropdown-item href="/admin/post/create" :active="request()->Is('admin/posts/create')">New
                         Post
                     </x-dropdown-item>
                     @endadmin
@@ -139,7 +150,7 @@
 
         <div class="flex mt-auto bottom-3 mx-1 w-full">
             <footer id="newsletter"
-                class="relative w-full bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-8 px-10 mt-auto">
+                class="relative w-full bg-gray-100 dark:bg-gray-800 border border-black border-opacity-5 rounded-xl text-center py-8 px-10 mt-auto">
                 <i class="fas fa-envelope mx-auto mb-6 text-blue-400 text-8xl" style="width: 200px;"></i>
                 <h5 class="text-3xl">Stay in touch with the latest posts</h5>
                 <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>

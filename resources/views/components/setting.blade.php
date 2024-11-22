@@ -11,6 +11,9 @@
                 <li class="mb-2">
                     <a href="/admin/posts" class="{{ request()->is('admin/posts') ? 'text-blue-500' : '' }}">All Posts</a>
                 </li>
+                <li class="mb-2">
+                    <a href="/admin/users" class="{{ request()->is('admin/users') ? 'text-blue-500' : '' }}">All Users</a>
+                </li>
                 <li>
                     <a href="/admin/post/create" class="{{ request()->is('admin/post/create') ? 'text-blue-500' : '' }}">New Post</a>
                 </li>

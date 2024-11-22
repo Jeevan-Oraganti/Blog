@@ -35,7 +35,7 @@ class PostController extends Controller
         )->paginate(20)->withQueryString();
 
 
-        return view('components.blog.view', compact('posts', 'users'));
+        return view('components.blog.index', compact('posts', 'users'));
     }
 
     public function blogsOpen(Post $post)

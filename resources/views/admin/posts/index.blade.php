@@ -49,6 +49,7 @@
                 </div>
             </div>
         </div>
+
         <div class="mt-6">
             {{ $posts->links() }}
         </div>

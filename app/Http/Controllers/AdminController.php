@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Post;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 
-class AdminPostController extends Controller
+class AdminController extends Controller
 {
     public function index()
     {
@@ -64,17 +65,50 @@ class AdminPostController extends Controller
 
     public function contacts()
     {
-        $contacts = Contact::latest()->filter([
-            'search' => request('search')]
-        )->paginate(10)->withQueryString();
+        $contacts = Contact::filter([
+            'search' => request('search')])->latest()->paginate(10)->withQueryString();
 
         return view('admin.contacts', ['contacts' => $contacts]);
     }
 
-    public function isLatest()
+    public function usersIndex()
     {
-        return $this->created_at->gt(Carbon::now()->subDays(1));
+        $users = User::all();
+
+        return view('admin.users.index', ['users' => $users]);
     }
+
+    public function userEdit($slug)
+    {
+        $user = User::where('id', $slug)->firstorFail();
+        return view('admin.users.edit', ['user' => $user]);
+    }
+
+    public function userUpdate(User $user)
+    {
+        $attributes = request()->validate([
+            'name' => 'required',
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user)],
+            'username' => ['required', Rule::unique('users', 'username')->ignore($user)],
+            'password' => 'nullable|string|min:8|confirmed'
+        ]);
+
+        if ($attributes['password'] ?? false) {
+            $attributes['password'] = bcrypt($attributes['password']);
+        }
+
+        $user->update($attributes);
+
+        return back()->with('success', 'User Updated');
+    }
+
+    public function userDestroy(User $user)
+    {
+        $user->delete();
+
+        return back()->with('success', 'User Deleted');
+    }
+
 
     /**
      * @param Post $post
