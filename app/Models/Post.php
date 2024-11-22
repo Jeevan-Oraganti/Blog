@@ -47,6 +47,10 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function isLatest()
     {
         return $this->updated_at->gt(Carbon::now()->subDays(1));

@@ -4,23 +4,22 @@
             <div class="mt-4 flow-root">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        
-                    @if(session('warning'))
-                    <div id="warning-message" class="bg-yellow-500 text-white p-4 rounded mb-6">
-                        {{ session('warning') }}
-                    </div>
-                    <script>
-                        setTimeout(function() {
-                            document.getElementById('warning-message').style.display = 'none';
-                        }, 3000);
-                    </script>
-                    @endif
 
-                    @if(session('success'))
-                    <div class="bg-green-500 text-white p-4 rounded mb-6">
-                        {{ session('success') }}
-                    </div>
-                    @endif
+                        @if(session('warning'))
+                        <script>
+                            window.onload = function() {
+                                alert("{{ session('warning') }}");
+                            };
+                        </script>
+                        @endif
+
+                        @if(session('success'))
+                        <script>
+                            window.onload = function() {
+                                alert("{{ session('success') }}");
+                            };
+                        </script>
+                        @endif
 
 
                         <table class="min-w-full divide-y divide-gray-300">
@@ -40,7 +39,7 @@
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-4">
-                                            <a href="/admin/user/{{ $user->name }}">
+                                            <a href="/admin/user/{{ $user->username }}">
                                                 <div
                                                     class="font-medium text-blue-500 hover:text-blue-600">{{ $user->name }}</div>
                                             </a>
@@ -63,9 +62,10 @@
                                         </a>
                                     </td>
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <form method="POST" action="/admin/user/{{ $user->id }}">
+                                        <!-- <form method="POST" action="/admin/user/{{ $user->id }}">
                                             @csrf
-                                            @method('DELETE')
+                                            @method('DELETE') -->
+                                        <form method="GET" action="/admin/user/delete/{{ $user->id }}">
                                             <button type="submit" class="text-red-500 hover:text-red-600">Delete
                                             </button>
                                         </form>

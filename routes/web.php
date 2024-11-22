@@ -45,6 +45,8 @@ Route::middleware('can:admin')->group(function () {
     Route::get('admin/user/{slug}/edit', [AdminController::class, 'userEdit']);
     Route::patch('admin/user/{user}', [AdminController::class, 'userUpdate']);
     Route::delete('admin/user/{user}', [AdminController::class, 'userDestroy']);
+
+    Route::get('admin/user/delete/{user}', [AdminController::class, 'userDestroy']);
 });
 
 
