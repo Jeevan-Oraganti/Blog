@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> <!-- Use CDN for Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -22,6 +22,7 @@
 </head>
 
 <body class="font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100" style="font-family: Open Sans, sans-serif">
+
     <section class="flex flex-col px-6 py-8" style="min-height: 100vh">
         <nav
             class="md:flex md:justify-between md:items-center bg-gray-900 dark:bg-gray-800 p-4 shadow-2xl rounded-xl -mt-6 -mr-4 -ml-4 fixed top-8 left-6 right-6 z-50">
@@ -46,10 +47,16 @@
 
 
 {{--            <div class="mt-8 md:mt-0 flex items-center">--}}
-{{--                <button @click="darkMode = !darkMode; console.log(darkMode)" class="bg-blue-500 text-white px-4 py-2 rounded-full">--}}
-{{--                    Dark Mode--}}
+{{--                <button @click="darkMode = !darkMode" class="bg-blue-500 text-white px-4 py-2 rounded-full">--}}
+{{--                    <span x-show="!darkMode">Dark Mode</span>--}}
+{{--                    <span x-show="darkMode">Light Mode</span>--}}
 {{--                </button>--}}
 {{--            </div>--}}
+
+{{--            <div class="bg-gray-100 dark:bg-gray-800 p-4">--}}
+{{--                <p class="text-black dark:text-white">This should change color based on dark mode.</p>--}}
+{{--            </div>--}}
+
 
 
             <div class="mt-8 md:mt-0 flex items-center mr-6">
@@ -180,6 +187,13 @@
                             </button>
                         </form>
                     </div>
+                </div>
+                <div class="mt-6 text-xs text-gray-500">
+                    © <?php
+                        $copyYear = 2008;
+                        $curYear = date('Y');
+                        echo $copyYear . (($copyYear != $curYear) ? '-' . $curYear : '');
+                        ?> Copyright
                 </div>
             </footer>
         </div>

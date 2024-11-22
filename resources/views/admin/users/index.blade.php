@@ -6,18 +6,24 @@
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
 
                         @if(session('warning'))
+                        <div id="warning-message" class="bg-yellow-500 text-white p-4 rounded mb-6">
+                            {{ session('warning') }}
+                        </div>
                         <script>
-                            window.onload = function() {
-                                alert("{{ session('warning') }}");
-                            };
+                            setTimeout(function() {
+                                document.getElementById('warning-message').style.display = 'none';
+                            }, 3000);
                         </script>
                         @endif
 
                         @if(session('success'))
+                        <div id="success-message" class="bg-green-500 text-white p-4 rounded mb-6">
+                            {{ session('success') }}
+                        </div>
                         <script>
-                            window.onload = function() {
-                                alert("{{ session('success') }}");
-                            };
+                            setTimeout(function() {
+                                document.getElementById('success-message').style.display = 'none';
+                            }, 3000);
                         </script>
                         @endif
 
@@ -80,9 +86,9 @@
             </div>
         </div>
 
-        {{-- <div class="mt-6">--}}
-        {{-- {{ $users->links() }}--}}
-        {{-- </div>--}}
+         <div class="mt-6">
+         {{ $users->links() }}
+         </div>
 
     </x-setting>
 
