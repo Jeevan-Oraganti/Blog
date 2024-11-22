@@ -35,15 +35,16 @@ Route::post('contact', [ContactController::class, 'store']);
 Route::middleware('can:admin')->group(function () {
     Route::get('admin/posts', [AdminController::class, 'index']);
     Route::post('admin/post', [AdminController::class, 'store']);
-    Route::get('admin/users', [AdminController::class, 'usersIndex']);
-    Route::delete('admin/user', [AdminController::class, 'userDestroy']);
-    Route::get('admin/user/{slug}/edit', [AdminController::class, 'userEdit']);
-    Route::patch('admin/user/{slug}', [AdminController::class, 'userUpdate']);
     Route::get('admin/contacts', [AdminController::class, 'contacts']);
     Route::get('admin/post/create', [AdminController::class, 'create']);
     Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit']);
     Route::patch('admin/posts/{post}', [AdminController::class, 'update']);
     Route::delete('admin/post/{post}', [AdminController::class, 'destroy']);
+
+    Route::get('admin/users', [AdminController::class, 'usersIndex']);
+    Route::get('admin/user/{slug}/edit', [AdminController::class, 'userEdit']);
+    Route::patch('admin/user/{user}', [AdminController::class, 'userUpdate']);
+    Route::delete('admin/user/{user}', [AdminController::class, 'userDestroy']);
 });
 
 

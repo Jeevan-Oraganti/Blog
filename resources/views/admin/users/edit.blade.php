@@ -12,7 +12,7 @@
             Back to Users
         </a>
         <img src="https://icons.veryicon.com/png/o/miscellaneous/blue-soft-fillet-icon/edit-173.png" class="w-8 h-8 float-right">
-        <form method="POST" action="/admin/users/{{ $user->id }}" class="mt-6">
+        <form method="POST" action="/admin/user/{{ $user->id }}" class="mt-6">
             @csrf
             @method('PATCH')
             <x-form.input name="name" :value="old('name', $user->name)" />
@@ -28,7 +28,7 @@
                 <input type="password" name="password_confirmation" id="password_confirmation" class="border border-gray-200 p-2 w-full" value="">
                 <x-form.error name="password_confirmation" />
             </x-form.field>
-            
+
             <x-form.button>Update</x-form.button>
         </form>
     </x-setting>

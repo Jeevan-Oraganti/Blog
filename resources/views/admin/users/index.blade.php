@@ -4,9 +4,28 @@
             <div class="mt-4 flow-root">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                        
+                    @if(session('warning'))
+                    <div id="warning-message" class="bg-yellow-500 text-white p-4 rounded mb-6">
+                        {{ session('warning') }}
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById('warning-message').style.display = 'none';
+                        }, 3000);
+                    </script>
+                    @endif
+
+                    @if(session('success'))
+                    <div class="bg-green-500 text-white p-4 rounded mb-6">
+                        {{ session('success') }}
+                    </div>
+                    @endif
+
+
                         <table class="min-w-full divide-y divide-gray-300">
                             <tbody class="divide-y divide-gray-200 bg-white">
-                            @foreach($users as $user)
+                                @foreach($users as $user)
                                 <tr>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-4">
@@ -16,7 +35,7 @@
                                     <td>
                                         <div class="ml-7 flex-shrink-0 whitespace-nowrap">
                                             <img src="https://i.pravatar.cc/60?u={{ $user->id }}" alt="Profile Image" width="40"
-                                                 height="40" class="rounded-full">
+                                                height="40" class="rounded-full">
                                         </div>
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
@@ -37,7 +56,7 @@
                                     </td>
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <a href="/admin/user/{{ $user->id }}/edit"
-                                           class="text-blue-500 hover:text-blue-600">
+                                            class="text-blue-500 hover:text-blue-600">
                                             <img
                                                 src="https://icons.veryicon.com/png/o/miscellaneous/blue-soft-fillet-icon/edit-173.png"
                                                 class="w-10 h-10">
@@ -53,7 +72,7 @@
                                     </td>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -61,9 +80,9 @@
             </div>
         </div>
 
-{{--        <div class="mt-6">--}}
-{{--            {{ $users->links() }}--}}
-{{--        </div>--}}
+        {{-- <div class="mt-6">--}}
+        {{-- {{ $users->links() }}--}}
+        {{-- </div>--}}
 
     </x-setting>
 

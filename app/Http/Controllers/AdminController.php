@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -73,7 +74,9 @@ class AdminController extends Controller
 
     public function usersIndex()
     {
-        $users = User::all();
+        $users = User::latest()->filter(
+            request(['search'])
+        )->paginate(10)->withQueryString();
 
         return view('admin.users.index', ['users' => $users]);
     }
@@ -90,11 +93,13 @@ class AdminController extends Controller
             'name' => 'required',
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user)],
             'username' => ['required', Rule::unique('users', 'username')->ignore($user)],
-            'password' => 'nullable|string|min:8|confirmed'
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         if ($attributes['password'] ?? false) {
             $attributes['password'] = bcrypt($attributes['password']);
+        } else {
+            unset($attributes['password']);
         }
 
         $user->update($attributes);
@@ -102,8 +107,16 @@ class AdminController extends Controller
         return back()->with('success', 'User Updated');
     }
 
-    public function userDestroy(User $user)
+
+    public function userDestroy($slug)
     {
+        $user = User::where('id', $slug)->findorFail($slug);
+
+        if($user->posts()->count() > 0) 
+        {
+            return back()->with('warning', 'Cannot delete user. The user has associated posts.');
+        }
+
         $user->delete();
 
         return back()->with('success', 'User Deleted');
