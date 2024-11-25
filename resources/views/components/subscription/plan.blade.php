@@ -1,5 +1,5 @@
-<!-- A single plan -->
-<div class=" flex flex-col justify-around shadow p-8 mx-4 w-1/4 text-center rounded {{ $color ?? 'bg-white' }}">
+<!-- Plan Component -->
+<div class="flex flex-col justify-around shadow p-8 mx-8 w-1/4 text-center rounded-xl {{ $effects ?? 'bg-gray-100' }}">
     <div class="flex justify-between mb-6">
         <h5 class="text-gray-700 uppercase tracking-tight font-bold">{{ $name }}</h5>
 
@@ -7,10 +7,9 @@
             <span class="text-lg">$</span>
             <span class="text-4xl">{{ $price }}</span>
         </a>
-
     </div>
 
-    <img src="images/lary-avatar.svg" alt="Image representing the monthly plan" class="w-60 h-60 mx-auto mb-4">
+    <img src="{{ $image }}" class="w-40 h-40 mx-auto mb-4">
 
     <p class="mb-8 py-4 text-gray-900 leading-normal">
         Still undecided? Ease in with a monthly plan that can be canceled in ten seconds.

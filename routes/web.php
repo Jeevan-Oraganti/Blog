@@ -50,4 +50,4 @@ Route::middleware('can:admin')->group(function () {
 });
 
 
-Route::get('/navigation', [NavigationController::class, 'index'])->name('navigation.index');
+Route::get('/subscription', [NavigationController::class, 'index'])->name('subscription.index');

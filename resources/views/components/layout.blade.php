@@ -21,7 +21,7 @@
     </style>
 </head>
 
-<body class="font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100" style="font-family: Open Sans, sans-serif">
+<body class="font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100" style="font-family: Open Oswald, sans-serif">
 
     <section class="flex flex-col px-6 py-8" style="min-height: 100vh">
         <nav
@@ -33,7 +33,7 @@
                 </a>
             </div>
 
-            <div class="flex items-center ml-20">
+            <div class="flex items-center ml-40">
                 <form method="GET" action="{{ url()->current() }}" class="relative ml-4">
                     @if(request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
