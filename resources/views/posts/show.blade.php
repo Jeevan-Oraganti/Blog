@@ -52,9 +52,11 @@
 
                 @include('posts._add-comment-form')
 
-                @foreach($post->comments as $comment)
-                    <x-post-comment :comment="$comment"/>
+                @foreach($post->comments()->paginate(3) as $comment)
+                    <x-post-comment :comment="$comment" :index="$loop->index"/>
                 @endforeach
+
+                {{ $post->comments()->paginate(3)->links() }}
             </section>
         </article>
     </main>

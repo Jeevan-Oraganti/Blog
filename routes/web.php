@@ -9,7 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PostCommentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NavigationController;
-
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
@@ -47,7 +47,16 @@ Route::middleware('can:admin')->group(function () {
     Route::delete('admin/user/{user}', [AdminController::class, 'userDestroy']);
 
     Route::get('admin/user/delete/{user}', [AdminController::class, 'userDestroy']);
+
+    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
 
-Route::get('/subscription', [NavigationController::class, 'index'])->name('subscription.index');
+Route::get('/subscription', [NavigationController::class, 'index']);
+
+//Route::middleware('auth')->group(function () {
+//    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+//    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+//});

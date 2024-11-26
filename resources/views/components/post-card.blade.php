@@ -37,8 +37,8 @@
             <footer class="flex justify-between items-center mt-8">
                 <div class="flex items-center text-sm">
                     <div class="flex-shrink-0">
-                        <img src="https://i.pravatar.cc/60?u= {{ $post->user_id }}" alt="Profile Image" width="60" height="60"
-                             class="rounded-xl">
+                        <img src="https://i.pravatar.cc/60?u={{ $post->author->id }}" alt="Profile Image" width="60" height="60"
+                            class="rounded-xl">
                     </div>
                     <div class="ml-3">
                         <h5 class="font-bold">

@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="mt-20 font-bold uppercase items-center"><a href="/admin/contacts">All Contacts</a></h1>
+    <h1 class="mt-20 font-bold uppercase text-blue-500 items-center"><a href="/admin/contacts">All Contacts</a></h1>
     <table class="min-w-full divide-y divide-gray-200 mt-8">
         <thead class="bg-gray-50">
         <tr>

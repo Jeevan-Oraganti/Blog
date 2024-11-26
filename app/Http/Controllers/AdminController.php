@@ -13,14 +13,17 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->filter(
-            request(['search', 'category', 'author'])
-        )->paginate(10)->withQueryString();
+        $posts = Post::latest()
+            ->withCount('comments')
+            ->filter(request(['search', 'category', 'author']))
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.posts.index', [
             'posts' => $posts
         ]);
     }
+
 
     public function create()
     {
@@ -67,16 +70,19 @@ class AdminController extends Controller
     public function contacts()
     {
         $contacts = Contact::filter([
-            'search' => request('search')])->latest()->paginate(10)->withQueryString();
+            'search' => request('search')
+        ])->latest()->paginate(10)->withQueryString();
 
         return view('admin.contacts', ['contacts' => $contacts]);
     }
 
     public function usersIndex()
     {
-        $users = User::latest()->filter(
-            request(['search'])
-        )->paginate(5)->withQueryString();
+        $users = User::latest()
+            ->withCount('posts')
+            ->filter(request(['search']))
+            ->paginate(5)
+            ->withQueryString();
 
         return view('admin.users.index', ['users' => $users]);
     }
@@ -112,8 +118,7 @@ class AdminController extends Controller
     {
         $user = User::where('id', $slug)->findorFail($slug);
 
-        if($user->posts()->count() > 0)
-        {
+        if ($user->posts()->count() > 0) {
             return back()->with('warning', 'Cannot delete user. The user has associated posts.');
         }
 

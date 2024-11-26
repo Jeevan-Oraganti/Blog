@@ -11,7 +11,7 @@
             </svg>
             Back to Users
         </a>
-        <img src="https://icons.veryicon.com/png/o/miscellaneous/blue-soft-fillet-icon/edit-173.png" class="w-8 h-8 float-right">
+        <img src="{{ asset('images/edit.svg') }}" class=" w-8 h-8 float-right">
         <form method="POST" action="/admin/user/{{ $user->id }}" class="mt-6">
             @csrf
             @method('PATCH')

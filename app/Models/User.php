@@ -55,4 +55,9 @@ class User extends Authenticatable
                 ->orWhere('email', 'like', '%' . $search . '%')
         ));
     }
+
+    public function profileImageUrl()
+    {
+        return "https://i.pravatar.cc/60?u=" . $this->id;
+    }
 }

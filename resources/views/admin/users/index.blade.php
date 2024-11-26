@@ -45,7 +45,7 @@
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-4">
-                                            <a href="/admin/user/{{ $user->username }}">
+                                            <a href="/profile/{{ $user->id }}">
                                                 <div
                                                     class="font-medium text-blue-500 hover:text-blue-600">{{ $user->name }}</div>
                                             </a>
@@ -59,11 +59,16 @@
                                             </a>
                                         </div>
                                     </td>
+                                    <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                                        <div class="ml-4">
+                                            <span class="text-sm text-gray-500">{{ $user->posts_count }} posts</span>
+                                        </div>
+                                    </td>
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <a href="/admin/user/{{ $user->id }}/edit"
                                             class="text-blue-500 hover:text-blue-600">
                                             <img
-                                                src="https://icons.veryicon.com/png/o/miscellaneous/blue-soft-fillet-icon/edit-173.png"
+                                                src="{{ asset('images/edit.svg') }}"
                                                 class="w-10 h-10">
                                         </a>
                                     </td>
@@ -72,7 +77,10 @@
                                             @csrf
                                             @method('DELETE') -->
                                         <form method="GET" action="/admin/user/delete/{{ $user->id }}">
-                                            <button type="submit" class="text-red-500 hover:text-red-600">Delete
+                                            <button type="submit" class="text-red-500 hover:text-red-600">
+                                                <img
+                                                    src="{{ asset('images/delete.svg') }}"
+                                                    class="w-10 h-10">
                                             </button>
                                         </form>
                                     </td>
@@ -86,9 +94,9 @@
             </div>
         </div>
 
-         <div class="mt-6">
-         {{ $users->links() }}
-         </div>
+        <div class="mt-6">
+            {{ $users->links() }}
+        </div>
 
     </x-setting>
 

@@ -70,8 +70,7 @@
 
         @foreach ($posts as $index => $post)
             <div class="p-6 rounded-lg shadow-lg mt-20 relative"
-                 style="background-image: url('{{ asset('storage/' . $post->thumbnail) }}'); background-size: cover; background-position: center;"
-                 class="rounded-lg">
+                 style="background-image: url('{{ asset('storage/' . $post->thumbnail) }}'); background-size: cover; background-position: center;" class="p-6 rounded-lg shadow-lg mt-20 relative">
                 <div class="overlay absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 rounded-lg"></div>
                 <div class="relative z-10 text-white">
                     <h2 class="text-balance font-semibold tracking-tight text-white-900">{{ $startingIndex + $index + 1 }}.

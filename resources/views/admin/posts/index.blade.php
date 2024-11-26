@@ -6,12 +6,16 @@
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                         <table class="min-w-full divide-y divide-gray-300">
                             <tbody class="divide-y divide-gray-200 bg-white">
-                            @foreach($posts as $post)
+                                @foreach($posts as $post)
                                 <tr>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-3">
                                             <div class="text-sm font-medium text-gray-900">{{ $loop->index + 1 }}</div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <img src="{{ $post->author->profileImageUrl() }}" alt="profile"
+                                            class="w-12 mx-auto rounded-full">
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-4">
@@ -19,10 +23,10 @@
                                                 <div
                                                     class="font-medium text-blue-500 hover:text-blue-600">{{ $post->title }}
                                                     @if($post->isLatest())
-                                                        <sup
-                                                            class="bg-blue-500 text-white text-base/4 px-1 py-0.5 rounded-full">
-                                                            New
-                                                        </sup>
+                                                    <sup
+                                                        class="bg-blue-500 text-white text-base/4 px-1 py-0.5 rounded-full">
+                                                        New
+                                                    </sup>
                                                     @endif
                                                 </div>
                                             </a>
@@ -30,21 +34,24 @@
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-4">
-                                            <a href="/admin/users/{{ $post->user->id }}">
+                                            <a href="/profile/{{ $post->user->id }}">
                                                 <div
                                                     class="font-medium text-blue-500 hover:text-blue-600">{{ $post->user->name }}</div>
                                             </a>
                                         </div>
                                     </td>
-                                    <td>
-                                        <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="thumbnail"
-                                             class="w-10 h-10 rounded-xl">
+                                    <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                                        <div class="ml-4">
+                                            <span
+                                                class="text-sm text-gray-500">{{ $post->comments_count }} comments</span>
+                                        </div>
+                                    </td>
                                     </td>
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <a href="/admin/posts/{{ $post->id }}/edit"
-                                           class="text-blue-500 hover:text-blue-600">
+                                            class="text-blue-500 hover:text-blue-600">
                                             <img
-                                                src="https://icons.veryicon.com/png/o/miscellaneous/blue-soft-fillet-icon/edit-173.png"
+                                                src="{{ asset('images/edit.svg') }}"
                                                 class="w-10 h-10">
                                         </a>
                                     </td>
@@ -52,12 +59,15 @@
                                         <form method="POST" action="/admin/post/{{ $post->id }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-600">Delete
+                                            <button type="submit" class="text-red-500 hover:text-red-600">
+                                                <img
+                                                    src="{{ asset('images/delete.svg') }}"
+                                                    class="w-10 h-10">
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
