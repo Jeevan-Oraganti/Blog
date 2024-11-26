@@ -56,6 +56,11 @@ class User extends Authenticatable
         ));
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function profileImageUrl()
     {
         return "https://i.pravatar.cc/60?u=" . $this->id;

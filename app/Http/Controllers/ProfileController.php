@@ -17,6 +17,7 @@ class ProfileController extends Controller
      */
     public function show(User $user): View
     {
+        $user->load('comments.post');
         return view('profile.show', [
             'user' => $user,
         ]);
