@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting heading="Manage Posts">
+    <x-setting heading="Manage Users">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="mt-4 flow-root">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

@@ -9,7 +9,7 @@
                 <span class="text-blue-500">Back</span>
             </a>
         </div>
-        
+
         <img src="https://icons.veryicon.com/png/o/miscellaneous/blue-soft-fillet-icon/edit-173.png" class="w-8 h-8" style="float: right;">
         <form method="POST" action="/admin/posts/{{ $post->id }}" enctype="multipart/form-data">
             @csrf

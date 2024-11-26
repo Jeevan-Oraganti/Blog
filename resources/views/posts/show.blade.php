@@ -22,9 +22,11 @@
             <div class="col-span-8">
                 <div class="hidden lg:flex justify-between mb-6">
                     <div class="mb-4">
-                        <a href="{{ url()->previous() }}" class="inline-flex items-center hover:text-blue-600">
-                            <svg class="h-6 w-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        <a href="/" class="inline-flex items-center hover:text-blue-600">
+                            <svg class="h-6 w-6 mr-2 text-blue-500" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15 19l-7-7 7-7"></path>
                             </svg>
                             <span class="text-blue-500">Back</span>
                         </a>
@@ -45,12 +47,16 @@
             <section class="col-span-8 col-start-5 mt-10 space-y-6">
 
                 @include('posts._add-comment-form')
+                @if($post->comments()->count())
 
-                @foreach($post->comments()->paginate(3) as $comment)
-                    <x-post-comment :comment="$comment" :index="$loop->index"/>
-                @endforeach
+                    @foreach($post->comments()->paginate(5) as $comment)
+                        <x-post-comment :comment="$comment" :index="$loop->index"/>
+                    @endforeach
 
-                {{ $post->comments()->paginate(3)->links() }}
+                    {{ $post->comments()->paginate(5)->links() }}
+                @else
+                    <p class="text-gray-500">No comments yet. Be the first to comment!</p>
+                @endif
             </section>
         </article>
     </main>

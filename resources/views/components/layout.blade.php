@@ -46,16 +46,16 @@
             </div>
 
 
-{{--            <div class="mt-8 md:mt-0 flex items-center">--}}
-{{--                <button @click="darkMode = !darkMode" class="bg-blue-500 text-white px-4 py-2 rounded-full">--}}
-{{--                    <span x-show="!darkMode">Dark Mode</span>--}}
-{{--                    <span x-show="darkMode">Light Mode</span>--}}
-{{--                </button>--}}
-{{--            </div>--}}
+            {{-- <div class="mt-8 md:mt-0 flex items-center">--}}
+            {{-- <button @click="darkMode = !darkMode" class="bg-blue-500 text-white px-4 py-2 rounded-full">--}}
+            {{-- <span x-show="!darkMode">Dark Mode</span>--}}
+            {{-- <span x-show="darkMode">Light Mode</span>--}}
+            {{-- </button>--}}
+            {{-- </div>--}}
 
-{{--            <div class="bg-gray-100 dark:bg-gray-800 p-4">--}}
-{{--                <p class="text-black dark:text-white">This should change color based on dark mode.</p>--}}
-{{--            </div>--}}
+            {{-- <div class="bg-gray-100 dark:bg-gray-800 p-4">--}}
+            {{-- <p class="text-black dark:text-white">This should change color based on dark mode.</p>--}}
+            {{-- </div>--}}
 
 
 
@@ -69,11 +69,14 @@
 
                     @admin
                     <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
-                    <x-dropdown-item href="/admin/post/create" :active="request()->Is('admin/posts/create')">New
-                        Post
-                    </x-dropdown-item>
+                    <x-dropdown-item href="/admin/post/create" :active="request()->Is('admin/posts/create')">New Post</x-dropdown-item>
+                    <x-dropdown-item href="/admin/users">All Users</x-dropdown-item>
+                    <x-dropdown-item href="/admin/contacts">Contacts</x-dropdown-item>
+                    <x-dropdown-item href="/blog">Blog</x-dropdown-item>
+                    <x-dropdown-item href="/subscription">Subscription</x-dropdown-item>
                     @endadmin
 
+                    <x-dropdown-item href="/profile/{{ auth()->user()->id }}">Profile</x-dropdown-item>
                     <x-dropdown-item href="#" x-data="{}"
                         @click.prevent="document.querySelector('#logout-form').submit()">Log Out
                     </x-dropdown-item>

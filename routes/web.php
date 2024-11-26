@@ -54,9 +54,9 @@ Route::middleware('can:admin')->group(function () {
 
 Route::get('/subscription', [NavigationController::class, 'index']);
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
-//    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-//    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
-//});
+Route::middleware('auth')->group(function () {
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+});
