@@ -48,7 +48,7 @@ Route::middleware('can:admin')->group(function () {
 
     Route::get('admin/user/delete/{user}', [AdminController::class, 'userDestroy']);
 
-    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+//    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
 

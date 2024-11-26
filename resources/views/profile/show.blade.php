@@ -2,6 +2,7 @@
     <div class="mt-10 container mx-auto px-6 py-12 md:px-16">
 
         <div class="bg-white shadow-2xl rounded-3xl p-10 space-y-10">
+
             @admin
             <div class="flex items-center mb-8">
                 <a href="/admin/users"
@@ -15,6 +16,7 @@
                 </a>
             </div>
             @endadmin
+
             <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 mb-12">
                 <div class="flex items-center space-x-8">
                     <div class="relative">
@@ -34,7 +36,6 @@
                     Edit Profile
                 </a>
                 @endadmin
-
             </div>
 
             <div class="space-y-8">
