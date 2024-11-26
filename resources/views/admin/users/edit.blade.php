@@ -8,9 +8,9 @@
                 </svg>
                 <span class="text-blue-500">Back</span>
             </a>
+            <img src="{{ asset('images/edit.svg') }}" class=" w-8 h-8 float-right">
         </div>
 
-        <img src="{{ asset('images/edit.svg') }}" class=" w-8 h-8 float-right">
         <form method="POST" action="/admin/user/{{ $user->id }}" class="mt-6">
             @csrf
             @method('PATCH')

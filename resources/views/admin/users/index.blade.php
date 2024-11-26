@@ -66,7 +66,7 @@
                                     </td>
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <a href="/admin/user/{{ $user->id }}/edit"
-                                            class="text-blue-500 hover:text-blue-600">
+                                            class="text-blue-500 hover:text-blue-600" title="Edit">
                                             <img
                                                 src="{{ asset('images/edit.svg') }}"
                                                 class="w-10 h-10">
@@ -77,7 +77,7 @@
                                             @csrf
                                             @method('DELETE') -->
                                         <form method="GET" action="/admin/user/delete/{{ $user->id }}">
-                                            <button type="submit" class="text-red-500 hover:text-red-600">
+                                            <button type="submit" class="text-red-500 hover:text-red-600" title="Delete">
                                                 <img
                                                     src="{{ asset('images/delete.svg') }}"
                                                     class="w-10 h-10">
