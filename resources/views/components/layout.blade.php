@@ -30,25 +30,33 @@
             </a>
         </div>
 
-        <div class="flex items-center ml-40">
-            <form method="GET" action="{{ url()->current() }}" class="relative ml-4">
-                @if(request('category'))
-                    <input type="hidden" name="category" value="{{ request('category') }}">
-                @endif
-                <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}"
-                       class="bg-gray-700 text-white rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <button type="submit" class="absolute right-0 top-0 mt-2 mr-2">
-                    <i class="fas fa-search text-gray-400 hover:text-white"></i>
-                </button>
-            </form>
-        </div>
+        @auth
+            <div class="flex items-center ml-40">
+                <form method="GET" action="{{ url()->current() }}" class="relative ml-4">
+                    @if(request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                    @endif
+                    <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}"
+                           class="bg-gray-700 text-white rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" class="absolute right-0 top-0 mt-2 mr-2">
+                        <i class="fas fa-search text-gray-400 hover:text-white"></i>
+                    </button>
+                </form>
+            </div>
+        @endauth
 
         <div class="mt-8 md:mt-0 flex items-center mr-6">
             @auth
                 <x-dropdown>
                     <x-slot name="trigger">
-                        <button class="text-xs font-bold uppercase text-white">
-                            Welcome, {{ auth()->user()->name }}</button>
+                        <div class="flex">
+                            <button class="text-xs font-bold uppercase text-white">
+                                Welcome, {{ auth()->user()->name }}</button>
+                            <img src="https://i.pravatar.cc/60?u={{ auth()->user()->id }}" alt="Profile Image"
+                                 width="40"
+                                 height="40"
+                                 class="ml-4 shadow-xl object-cover border-2 border-blue-100 rounded-full transition-all duration-300 ease-in-out transform hover:scale-110 cursor-pointer">
+                        </div>
                     </x-slot>
 
                     @admin
@@ -103,8 +111,8 @@
                                     <?php
                                     printf(
                                         '<a href="%s" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out" %s>
-                            <i class="%s"></i> %s
-                        </a>',
+                        <i class="%s"></i> %s
+                    </a>',
                                         $item->url,
                                         isset($item->onclick) ? '@click.prevent="' . $item->onclick . '"' : '',
                                         $item->icon_url,
@@ -115,8 +123,8 @@
                                     <?php
                                     printf(
                                         '<span class="block px-4 py-2 text-sm text-gray-700 cursor-not-allowed">
-                            <i class="%s"></i> %s
-                        </span>',
+                        <i class="%s"></i> %s
+                    </span>',
                                         $item->icon_url,
                                         $item->name
                                     );

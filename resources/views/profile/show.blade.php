@@ -19,9 +19,31 @@
 
             <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 mb-12">
                 <div class="flex items-center space-x-8">
-                    <div class="relative">
+                    <div x-data="{ open: false }">
                         <img src="{{ $user->profileImageUrl() }}" alt="Profile Image"
-                             class="w-40 h-40 rounded-full shadow-xl object-cover border-4 border-gray-200 transition-transform duration-300 transform hover:scale-105">
+                             class="w-40 h-40 rounded-full shadow-xl object-cover border-4 border-gray-200
+                             transition-transform duration-300 transform hover:scale-105 cursor-pointer"
+                             @click="open = true">
+
+                        <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0 transform scale-90"
+                             x-transition:enter-end="opacity-100 transform scale-100"
+                             x-transition:leave="transition ease-in duration-300"
+                             x-transition:leave-start="opacity-100 transform scale-100"
+                             x-transition:leave-end="opacity-0 transform scale-90"
+                             @click.away="open = false"
+                             style="backdrop-filter: blur(10px);"
+                             class="mt-20 fixed inset-0 bg-opacity-75 flex items-center justify-center z-50">
+
+                            <div class="relative" @click.stop>
+                                <img src="{{ $user->profileImageUrl() }}" alt="Profile Image"
+                                     class="w-80 h-80 rounded-full border-4 border-gray-200">
+
+                                <button @click.away="open = false"
+                                        class="absolute top-0 right-0 mt-4 mr-4 text-white text-2xl font-bold">&times;
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div>
@@ -54,7 +76,7 @@
 
                     <div class="flex flex-col space-y-2">
                         <span class="text-sm text-gray-500 font-medium">Profile Picture</span>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-4 ">
                             <img src="{{ $user->profileImageUrl() }}" alt="Profile Image"
                                  class="w-16 h-16 rounded-full border-2 border-gray-300 shadow-md object-cover">
                         </div>
@@ -66,7 +88,7 @@
             <div class="mt-12">
                 <h2 class="text-2xl font-semibold text-gray-900 mb-6">User Posts</h2>
                 <div class="space-y-4">
-                    @foreach($user->posts as $post)
+                    @foreach($user->posts()->paginate(5) as $post)
                         <div
                             class="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow-md hover:shadow-lg transform hover:scale-102 transition-all duration-300">
                             <a href="/post/{{ $post->slug }}"
@@ -79,6 +101,9 @@
                     @if($user->posts->isEmpty())
                         <p class="text-gray-600 text-sm">No posts available.</p>
                     @endif
+                </div>
+                <div class="mt-6">
+                    {{ $user->posts()->paginate(5)->links() }}
                 </div>
             </div>
 
