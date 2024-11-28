@@ -56,4 +56,11 @@ class Post extends Model
     {
         return $this->updated_at->gt(Carbon::now()->subDays(1));
     }
+
+    public function thumbnailUrl()
+    {
+        return $this->thumbnail
+            ? asset('storage/' . $this->thumbnail)
+            : asset('images/default-thumbnail.svg');
+    }
 }
