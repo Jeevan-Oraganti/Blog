@@ -19,7 +19,7 @@
             <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 mb-12">
                 <div class="flex items-center space-x-8">
                     <div x-data="{ open: false }">
-                        <img src="{{ $user->profileImageUrl() }}" alt="Profile Image"
+                        <img src="{{ $user->profileImageUrl() ?? asset('images/default-profile.svg')   }}" alt="Profile Image"
                             class="w-40 h-40 rounded-full shadow-xl object-cover border-4 border-gray-200
                              transition-transform duration-300 transform hover:scale-105 cursor-pointer"
                             @click="open = true">
@@ -35,7 +35,7 @@
                             class="mt-20 fixed inset-0 bg-opacity-75 flex items-center justify-center z-50">
 
                             <div class="relative" @click.stop>
-                                <img src="{{ $user->profileImageUrl() }}" alt="Profile Image"
+                                <img src="{{ $user->profileImageUrl() ?? asset('images/default-profile.svg')   }}" alt="Profile Image"
                                     class="w-80 h-80 rounded-full border-4 border-gray-200">
 
                                 <button @click.away="open = false"
@@ -81,7 +81,7 @@
                     <div class="flex flex-col space-y-2">
                         <span class="text-sm text-gray-500 font-medium">Profile Picture</span>
                         <div class="flex items-center space-x-4 ">
-                            <img src="{{ $user->profileImageUrl() }}" alt="Profile Image"
+                            <img src="{{ $user->profileImageUrl() ?? asset('images/default-profile.svg')   }}" alt="Profile Image"
                                 class="w-16 h-16 rounded-full border-2 border-gray-300 shadow-md object-cover">
                         </div>
                     </div>

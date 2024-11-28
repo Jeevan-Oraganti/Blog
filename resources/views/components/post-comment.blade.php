@@ -3,8 +3,8 @@
 <x-panel :class="$index % 2 === 0 ? 'bg-white' : 'bg-gray-100'" wire:key="comment-{{ $comment->id }}">
     <article class="flex space-x-4">
         <div class="flex-shrink-0">
-            <img src="{{ $comment->author->profileImageUrl() }}" alt="Profile Image" width="60" height="60"
-                class="rounded-xl">
+            <img src="{{ $comment->author->profileImageUrl() ?? asset('images/default-profile.svg')   }}" alt="Profile Image" width="60" height="60"
+                class="w-14 h-14 rounded-full">
         </div>
 
         <div>

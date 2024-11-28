@@ -39,7 +39,7 @@
                                     </td>
                                     <td>
                                         <a href="/profile/{{ $post->user->id }}">
-                                            <img src="{{ $post->author->profileImageUrl() }}" alt="profile"
+                                            <img src="{{ $post->author->profileImageUrl() ?? asset('images/default-profile.svg')  }}" alt="profile"
                                                 class="w-12 mx-auto rounded-full">
                                         </a>
                                     </td>

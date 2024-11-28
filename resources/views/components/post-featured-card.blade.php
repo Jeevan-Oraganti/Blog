@@ -35,7 +35,7 @@
             <footer class="flex justify-between items-center mt-8">
                 <div class="flex items-center text-sm">
                     <div class="flex-shrink-0">
-                        <img src="{{ asset('storage/' . $post->author->profile) }}" alt="Profile Image" width="60" height="60"
+                        <img src="{{ $post->author->profileImageUrl() ?? asset('images/default-profile.svg')   }}" alt="Profile Image" width="60" height="60"
                             class="rounded-xl">
                     </div>
                     <div class="ml-3">

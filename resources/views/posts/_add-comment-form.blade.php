@@ -3,11 +3,9 @@
     <form method="POST" action="/post/{{ $post->slug }}/comment">
         @csrf
         <header class="flex items-center">
-            <img src="{{ auth()->user()->profileImageUrl() }}"
+            <img src="{{ auth()->user()->profileImageUrl() ?? asset('images/default-profile.svg') }}"
                 alt="Profile Image"
-                width="60"
-                height="60"
-                class="rounded-xl">
+                class="w-14 h-14 rounded-full">
             <h2 class="ml-4">Want to participate?</h2>
         </header>
         <div class="mt-6">

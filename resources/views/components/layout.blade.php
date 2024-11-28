@@ -53,7 +53,7 @@
                             <button class="text-xs font-bold uppercase text-white">
                                 Welcome, {{ auth()->user()->name }}
                             </button>
-                            <img src="{{ auth()->user()->profileImageUrl() }}" alt="Profile Image"
+                            <img src="{{ auth()->user()->profileImageUrl() ?? asset('images/default-profile.svg')   }}" alt="Profile Image"
                                 class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-xl object-cover transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer">
                         </div>
                     </x-slot>
