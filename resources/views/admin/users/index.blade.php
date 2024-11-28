@@ -37,11 +37,10 @@
                                             <div class="text-sm font-medium text-gray-900">{{ $loop->index + 1 }}</div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="ml-7 flex-shrink-0 whitespace-nowrap">
-                                            <img src="https://i.pravatar.cc/60?u={{ $user->id }}" alt="Profile Image"
-                                                 width="40"
-                                                 height="40" class="rounded-full">
+                                    <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                                        <div class="ml-7 flex-shrink-0">
+                                            <img src="{{ $user->profileImageUrl() ?? asset('images/default-profile.svg') }}" alt="Profile Image"
+                                                 class="w-10 h-10 rounded-full">
                                         </div>
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
@@ -96,41 +95,41 @@
             </div>
         </div>
 
-        {{-- <div class="mt-6">--}}
-        {{-- {{ $users->links() }}--}}
-        {{-- </div>--}}
+         <div class="mt-6">
+         {{ $users->links() }}
+         </div>
 
-        <div class="mt-6">
+{{--        <div class="mt-6">--}}
 
-            <div class="flex items-center justify-end space-x-2">
-                @if ($users->onFirstPage())
-                    <span class="text-gray-500 cursor-not-allowed">&laquo; Previous</span>
-                @else
-                    <a href="{{ $users->previousPageUrl() }}" class="text-indigo-600 hover:text-indigo-700">«
-                        Previous</a>
-                @endif
-                    <div class="flex relative justify-end -space-x-1.5">
-                        @foreach($users as $user)
-                            <div class="relative hover:border-blue-500">
-                                <img src="{{ $user->profileImageUrl() }}" alt="{{ $user->name }}"
-                                     class="w-8 h-8 rounded-full border-2 border-white object-cover transition-transform duration-200 ease-in-out hover:scale-110">
-                            </div>
-                        @endforeach
-                    </div>
-                @foreach($users->links() as $link)
-                    <a href="{{ $link->url }}" class="w-10 h-10 rounded-full border-2 border-gray-300">
-                        <img src="{{ $link->user->profileImageUrl() }}" alt="{{ $link->user->name }}"
-                             class="w-10 h-10 rounded-full object-cover">
-                    </a>
-                @endforeach
+{{--            <div class="flex items-center justify-end space-x-2">--}}
+{{--                @if ($users->onFirstPage())--}}
+{{--                    <span class="text-gray-500 cursor-not-allowed">&laquo; Previous</span>--}}
+{{--                @else--}}
+{{--                    <a href="{{ $users->previousPageUrl() }}" class="text-indigo-600 hover:text-indigo-700">«--}}
+{{--                        Previous</a>--}}
+{{--                @endif--}}
+{{--                    <div class="flex relative justify-end -space-x-1.5">--}}
+{{--                        @foreach($users as $user)--}}
+{{--                            <div class="relative hover:border-blue-500">--}}
+{{--                                <img src="{{ $user->profileImageUrl() }}" alt="{{ $user->name }}"--}}
+{{--                                     class="w-8 h-8 rounded-full border-2 border-white object-cover transition-transform duration-200 ease-in-out hover:scale-110">--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                @foreach($users->links() as $link)--}}
+{{--                    <a href="{{ $link->url }}" class="w-10 h-10 rounded-full border-2 border-gray-300">--}}
+{{--                        <img src="{{ $link->user->profileImageUrl() }}" alt="{{ $link->user->name }}"--}}
+{{--                             class="w-10 h-10 rounded-full object-cover">--}}
+{{--                    </a>--}}
+{{--                @endforeach--}}
 
-                @if ($users->hasMorePages())
-                    <a href="{{ $users->nextPageUrl() }}" class="text-indigo-600 hover:text-indigo-700">Next »</a>
-                @else
-                    <span class="text-gray-500 cursor-not-allowed">Next »</span>
-                @endif
-            </div>
-        </div>
+{{--                @if ($users->hasMorePages())--}}
+{{--                    <a href="{{ $users->nextPageUrl() }}" class="text-indigo-600 hover:text-indigo-700">Next »</a>--}}
+{{--                @else--}}
+{{--                    <span class="text-gray-500 cursor-not-allowed">Next »</span>--}}
+{{--                @endif--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
 
     </x-setting>

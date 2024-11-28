@@ -6,7 +6,7 @@
     </h1>
 
     <div class="flex flex-wrap">
-        <aside class="w-full sm:w-1/4 lg:w-1/5 flex-shrink-0">
+        <aside class="w-full sm:w-1/4 lg:w-1/6 flex-shrink-0">
             <h4 class="font-bold mb-6">Links</h4>
             <ul>
                 <li class="mb-2">

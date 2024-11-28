@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('subscription', function (Blueprint $table) {
+        Schema::table('navigation', function (Blueprint $table) {
             $table->string('onclick')->nullable();
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('subscription', function (Blueprint $table) {
+        Schema::table('navigation', function (Blueprint $table) {
             $table->dropColumn('onclick');
         });
     }

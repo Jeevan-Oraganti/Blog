@@ -63,6 +63,8 @@ class User extends Authenticatable
 
     public function profileImageUrl()
     {
-        return "https://i.pravatar.cc/60?u=" . $this->id;
+        return $this->profile
+            ? asset('storage/' . $this->profile)
+            : asset('images/default-profile.svg');
     }
 }

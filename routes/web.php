@@ -32,31 +32,39 @@ Route::get('contact-us', [ContactController::class, 'index']);
 Route::post('contact', [ContactController::class, 'store']);
 
 //Admin
-Route::middleware('can:admin')->group(function () {
-    Route::get('admin/posts', [AdminController::class, 'index']);
-    Route::post('admin/post', [AdminController::class, 'store']);
-    Route::get('admin/contacts', [AdminController::class, 'contacts']);
-    Route::get('admin/post/create', [AdminController::class, 'create']);
-    Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit']);
-    Route::patch('admin/posts/{post}', [AdminController::class, 'update']);
-    Route::delete('admin/post/{post}', [AdminController::class, 'destroy']);
 
+Route::middleware('can:admin')->group(function () {
+    Route::get('admin/posts', [AdminController::class, 'index'])->name('admin.posts.index');
+    Route::post('admin/post', [AdminController::class, 'store'])->name('admin.posts.store');
     Route::get('admin/users', [AdminController::class, 'usersIndex']);
     Route::get('admin/user/{slug}/edit', [AdminController::class, 'userEdit']);
     Route::patch('admin/user/{user}', [AdminController::class, 'userUpdate']);
+    Route::get('admin/contacts', [AdminController::class, 'contacts'])->name('admin.contacts');
+    Route::get('admin/post/create', [AdminController::class, 'create'])->name('admin.posts.create');
+    Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit'])->name('admin.posts.edit');
+    Route::patch('admin/posts/{post}', [AdminController::class, 'update'])->name('admin.posts.update');
+    Route::delete('admin/post/{post}', [AdminController::class, 'destroy'])->name('admin.posts.destroy');
+    Route::post('admin/posts/{post}/approve', [AdminController::class, 'approve'])->name('admin.posts.approve');
+    Route::post('admin/posts/{post}/reject', [AdminController::class, 'reject'])->name('admin.posts.reject');
+    Route::get('admin/contacts', [AdminController::class, 'contacts']);
+
     Route::delete('admin/user/{user}', [AdminController::class, 'userDestroy']);
 
     Route::get('admin/user/delete/{user}', [AdminController::class, 'userDestroy']);
-
-//    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
 
 Route::get('/subscription', [NavigationController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('profile', [ProfileController::class, 'show'])->name('profile.edit');
-    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('profile/{slug}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
+    Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+    Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::patch('posts/{post}', [PostController::class, 'update'])->name('posts.update');
+    Route::get('user/posts', [PostController::class, 'userPosts'])->name('user.posts');
 });

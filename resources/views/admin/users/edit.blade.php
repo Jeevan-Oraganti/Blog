@@ -11,12 +11,16 @@
             <img src="{{ asset('images/edit.svg') }}" class=" w-8 h-8 float-right">
         </div>
 
-        <form method="POST" action="/admin/user/{{ $user->id }}" class="mt-6">
+        <form method="POST" action="/admin/user/{{ $user->id }}" enctype="multipart/form-data" class="mt-6">
             @csrf
             @method('PATCH')
             <x-form.input name="name" :value="old('name', $user->name)" />
             <x-form.input name="username" :value="old('username', $user->username)" />
             <x-form.input name="email" :value="old('email', $user->email)" />
+            <x-form.input name="profile" type="file" :value="old('profile', $user->profile)" />
+            @if ($user->profile)
+            <img src="{{ asset('storage/' . $user->profile) }}" alt="profile" class="mt-4 w-16 h-16 rounded-full">
+            @endif
             <x-form.field>
                 <x-form.label name="password" />
                 <input type="password" name="password" id="password" class="border border-gray-200 p-2 w-full" value="">

@@ -13,7 +13,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()
+        $posts = Post::orderBy('approved', 'asc')
+            ->orderBy('published_at', 'desc')
             ->withCount('comments')
             ->filter(request(['search', 'category', 'author']))
             ->paginate(10)
@@ -67,13 +68,32 @@ class AdminController extends Controller
         return back()->with('success', 'Post Deleted');
     }
 
+    public function approve(Post $post)
+    {
+        $post->update([
+            'approved' => true,
+            'published_at' => Carbon::now()
+        ]);
+
+        return back()->with('success', 'Post Approved');
+    }
+
+    public function reject(Post $post)
+    {
+        $post->delete();
+
+        return back()->with('success', 'Post Rejected');
+    }
+
     public function contacts()
     {
         $contacts = Contact::filter([
             'search' => request('search')
         ])->latest()->paginate(10)->withQueryString();
 
-        return view('admin.contacts', ['contacts' => $contacts]);
+        $users = User::all();
+
+        return view('admin.contacts', ['contacts' => $contacts, 'user' => $users]);
     }
 
     public function usersIndex()
@@ -99,8 +119,15 @@ class AdminController extends Controller
             'name' => 'required',
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user)],
             'username' => ['required', Rule::unique('users', 'username')->ignore($user)],
+            'profile' => 'nullable|image|max:2048',
             'password' => 'nullable|string|min:8|confirmed',
         ]);
+
+
+        if ($attributes['profile'] ?? false) {
+            $attributes['profile'] = request()->file('profile')->store('profiles', 'public');
+        }
+
 
         if ($attributes['password'] ?? false) {
             $attributes['password'] = bcrypt($attributes['password']);

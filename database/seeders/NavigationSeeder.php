@@ -13,7 +13,7 @@ class NavigationSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('subscription')->insert([
+        DB::table('navigation')->insert([
             ['name' => 'Home', 'url' => '/', 'is_disabled' => false, 'is_featured' => true, 'icon_url' => 'fas fa-home', 'onclick' => null],
             ['name' => 'Dashboard', 'url' => '/admin/posts', 'is_disabled' => true, 'is_featured' => true, 'icon_url' => 'fas fa-tachometer-alt', 'onclick' => null],
             ['name' => 'New Post', 'url' => '/admin/posts/create', 'is_disabled' => true, 'is_featured' => false, 'icon_url' => 'fas fa-plus', 'onclick' => null],
