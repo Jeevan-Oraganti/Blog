@@ -1,10 +1,10 @@
 @props(['post'])
 
-<article {{ $attributes->merge(['class' => 'transition-all duration-300 hover:bg-gray-50 border border-gray-200 rounded-2xl shadow-md overflow-hidden', 'style' => 'max-height: fit-content']) }}>
+<article {{ $attributes->merge(['class' => 'transition-all duration-300 hover:bg-gray-200 border border-gray-200 rounded-2xl shadow-md overflow-hidden', 'style' => 'max-height: fit-content']) }}>
     <div class="py-6 px-6 flex flex-col">
         <!-- Post Image -->
         <div class="mb-6">
-            <img src="{{ $post->thumbnailUrl() ?? asset('images/default-thumbnail.svg') }}" alt="Blog Post illustration" class="w-full h-auto object-cover rounded-xl shadow-md" style="max-height: 300px;">
+            <img src="{{ $post->thumbnailUrl() ?? asset('images/default-thumbnail.svg') }}" alt="Blog Post illustration" class="w-full h-auto object-cover rounded-xl" style="max-height: 300px;">
         </div>
 
         <!-- Post Content -->

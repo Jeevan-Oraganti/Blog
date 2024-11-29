@@ -1,6 +1,6 @@
 @props(['post'])
 <article
-    class="transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl shadow-lg">
+    class="transition-colors duration-300 hover:bg-gray-200 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl shadow-lg">
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
             <img src="{{ $post->thumbnailUrl() ?? asset('images/default-thumbnail.svg') }}" alt="Blog Post illustration" class="rounded-xl w-full h-80 object-cover">
@@ -14,7 +14,7 @@
 
                 <div class="mt-4">
                     <h1 class="text-3xl font-bold text-gray-800">
-                        <a href="/post/{{ $post->slug }}" class="hover:underline">
+                        <a href="/post/{{ $post->slug }}" class="hover:text-blue-500 transition-colors duration-300">
                             {{ $post->title }}
                         </a>
                     </h1>
