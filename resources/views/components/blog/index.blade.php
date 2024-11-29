@@ -27,8 +27,7 @@
             $startingIndex = ($posts->currentPage() - 1) * $posts->perPage();
         @endphp
         @foreach($posts as $index => $post)
-            <tr class="{{ $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' }}"
-                onclick="window.location.href='/blog/id={{ $post->id }}'" style="cursor:pointer;">
+            <tr class="{{ $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' }}">
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-gray-900">{{ $startingIndex + $index + 1 }}</div>
                 </td>

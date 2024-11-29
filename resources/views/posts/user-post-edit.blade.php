@@ -13,7 +13,7 @@
         <img src="{{ asset('images/edit.svg') }}" class="w-8 h-8">
     </div>
 
-    <form method="POST" action="/posts/{{ $post->id }}" enctype="multipart/form-data" class="space-y-6 max-w-lg mx-auto">
+    <form method="POST" action="/post/{{ $post->id }}" enctype="multipart/form-data" class="space-y-6 max-w-lg mx-auto">
         @csrf
         @method('PATCH')
 

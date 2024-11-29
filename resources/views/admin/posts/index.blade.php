@@ -52,22 +52,22 @@
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         @if(!$post->approved)
                                         <div class="flex space-x-2">
-                                            <form method="POST" action="{{ route('admin.posts.approve', $post) }}">
+                                            <form method="POST" action="{{ route('admin.post.approve', $post) }}">
                                                 @csrf
                                                 <button type="submit" class="text-green-500 hover:text-green-600"
                                                     title="Approve">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 transition-all duration-300 ease-in-out transform hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
+                                                    <img
+                                                        src="{{ asset('images/approve.svg') }}"
+                                                        class="w-9 h-9 transition-all duration-300 ease-in-out transform hover:scale-110">
                                                 </button>
                                             </form>
-                                            <form method="POST" action="{{ route('admin.posts.reject', $post) }}">
+                                            <form method="POST" action="{{ route('admin.post.reject', $post) }}">
                                                 @csrf
                                                 <button type="submit" class="text-red-500 hover:text-red-600"
                                                     title="Reject">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 transition-all duration-300 ease-in-out transform hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
+                                                    <img
+                                                        src="{{ asset('images/reject.svg') }}"
+                                                        class="w-9 h-9 transition-all duration-300 ease-in-out transform hover:scale-110">
                                                 </button>
                                             </form>
                                         </div>

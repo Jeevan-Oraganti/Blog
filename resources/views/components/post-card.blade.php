@@ -38,7 +38,7 @@
                 <div class="flex items-center text-sm">
                     <div class="flex-shrink-0">
                         <img src="{{ $post->author->profileImageUrl() }}" alt="Profile Image" width="60" height="60"
-                            class="rounded-xl">
+                            class="w-10 h-10 rounded-xl">
                     </div>
                     <div class="ml-3">
                         <h5 class="font-bold">

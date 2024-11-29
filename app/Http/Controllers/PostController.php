@@ -47,7 +47,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         if (!$post->approved) {
-            abort(403, 'Sorry, this post is not approved');
+            return redirect('/user/posts')->with('error', 'Sorry, this post is still waiting for approval');
         }
         return view('posts.show', [
             'post' => $post
@@ -79,6 +79,13 @@ class PostController extends Controller
         $post->update($attributes);
 
         return back()->with('success', 'Post Updated and sent for approval');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return back()->with('success', 'Post Deleted');
     }
 
     public function userPosts()
