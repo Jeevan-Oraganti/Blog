@@ -15,7 +15,7 @@
                 </p>
             </header>
             <p>
-                {{ $comment->body ?? 'No comment body available.' }}
+                {{ $comment->body ?? 'No comment available.' }}
             </p>
         </div>
 

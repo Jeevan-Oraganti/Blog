@@ -14,6 +14,7 @@ class AdminController extends Controller
     public function index()
     {
         $posts = Post::orderBy('approved', 'asc')
+            ->orderBy('created_at', 'asc')
             ->orderBy('published_at', 'desc')
             ->withCount('comments')
             ->filter(request(['search', 'category', 'author']))
