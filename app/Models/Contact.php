@@ -24,4 +24,9 @@ class Contact extends Model
     {
         return $this->created_at->gt(Carbon::now()->subDays(1));
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

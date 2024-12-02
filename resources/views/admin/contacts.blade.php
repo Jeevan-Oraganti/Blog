@@ -41,8 +41,11 @@
                 </td>
                 <td>
                     <div class="ml-7 flex-shrink-0 whitespace-nowrap">
-                        <img src="{{ asset('storage/' . $contact->profile) }}" alt="Profile Image" width="40"
-                            height="40" class="rounded-full">
+                        @if ($contact->user)
+                        <img src="{{ $contact->user->profileImageUrl() ?? asset('images/default-profile.svg') }}" alt="Profile Image" width="40" height="40" class="rounded-full">
+                        @else
+                        <img src="{{ asset('images/default-profile.svg') }}" alt="Default Profile Image" width="40" height="40" class="rounded-full">
+                        @endif
                     </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">

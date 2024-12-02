@@ -41,13 +41,21 @@ class AppServiceProvider extends ServiceProvider
             return $user->username === 'john';
         });
 
-        Blade::if('admin', function() {
+        Blade::if('admin', function () {
             return request()->user()?->can('admin');
         });
 
         View::composer('*', function ($view) {
-            $navItems = Navigation::all();
-            $view->with('navItems', $navItems);
+            $navItems = Navigation::where('is_disabled', false)
+                ->orderBy('created_at', 'asc')
+                ->get();
+                $view->with('navItems', $navItems);
         });
+
+
+        // View::composer('*', function ($view) {
+        //     $navItems = Navigation::all();
+        //     $view->with('navItems', $navItems);
+        // });
     }
 }

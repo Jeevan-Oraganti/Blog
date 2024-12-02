@@ -21,9 +21,7 @@
 
 <section class="flex flex-col px-6 py-8 min-h-screen">
     <nav
-        class="md:flex md:justify-between md:items-center bg-gray-900 p-5 shadow-lg rounded-xl fixed top-3 left-3 right-3 z-50 bg-grey-700 backdrop-blur-sm transition-all duration-300"
-{{--        style="backdrop-filter: blur(10px);"--}}
-    >
+        class="md:flex md:justify-between md:items-center bg-gray-900 p-5 shadow-lg rounded-xl fixed top-3 left-3 right-3 z-50 bg-grey-700 backdrop-blur-sm transition-all duration-300">
 
         <div>
             <a href="/" class="home-icon ml-4">
@@ -47,13 +45,13 @@
         @endauth
 
         <div class="mt-8 md:mt-0 flex items-center mr-6">
-            @auth
+            <!-- @auth
                 <x-dropdown>
                     <x-slot name="trigger">
                         <div class="flex items-center mr-4">
                             <img src="{{ auth()->user()->profileImageUrl() ?? asset('images/default-profile.svg') }}"
-                                 alt="Profile Image"
-                                 class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-xl object-cover transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer">
+                                alt="Profile Image"
+                                class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-xl object-cover transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer">
                         </div>
                     </x-slot>
 
@@ -70,13 +68,17 @@
                     <x-dropdown-item href="/profile/{{ auth()->user()->id }}">My Profile</x-dropdown-item>
                     <x-dropdown-item href="/subscription">Subscription</x-dropdown-item>
                     <x-dropdown-item href="#" x-data="{}"
-                                     @click.prevent="document.querySelector('#logout-form').submit()">Log Out
+                        @click.prevent="document.querySelector('#logout-form').submit()">Log Out
                     </x-dropdown-item>
 
                     <form id="logout-form" method="POST" action="/logout" class="hidden">
                         @csrf
-                    </form>
-                </x-dropdown>
+                </form>
+            </x-dropdown>
+
+
+
+
 
             @else
 
@@ -85,59 +87,102 @@
                 <a href="/contact-us">
                     <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
                 </a>
-            @endauth
 
-            <div x-data="{ open: false }" @click.away="open = false" class="relative">
-                <button id="menu-toggle" @click="open = !open"
-                        class="bg-blue-500 ml-4 rounded-full text-xs font-semibold text-white uppercase py-2 px-5 transition duration-300 ease-in-out transform hover:scale-105">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div id="menu" x-show="open" x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 transform scale-95"
-                     x-transition:enter-end="opacity-100 transform scale-100"
-                     x-transition:leave="transition ease-in duration-75"
-                     x-transition:leave-start="opacity-100 transform scale-100"
-                     x-transition:leave-end="opacity-0 transform scale-95"
-                     class="absolute right-0 bg-white shadow-md rounded-lg mt-2 py-2 w-48">
-                    @auth
+
+
+
+            @endauth -->
+
+            @auth
+
+                <div x-data="{ open: false }" @click.away="open = false" class="relative">
+                    <button id="menu-toggle" @click="open = !open"
+                            class="rounded-full text-xs font-semibold text-white uppercase transition duration-300 ease-in-out transform hover:scale-105">
+                        <div class="flex items-center mr-4">
+                            <img src="{{ auth()->user()->profileImageUrl() ?? asset('images/default-profile.svg') }}"
+                                 alt="Profile Image"
+                                 class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-xl object-cover transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer">
+                        </div>
+                    </button>
+                    <div id="menu" x-show="open" x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform scale-95"
+                         x-transition:enter-end="opacity-100 transform scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="opacity-100 transform scale-100"
+                         x-transition:leave-end="opacity-0 transform scale-95"
+                         class="absolute right-0 bg-white shadow-md rounded-lg mt-2 py-2 w-48">
+
                         @foreach ($navItems as $item)
-                            @if (!$item->is_disabled)
-                                    <?php
-                                    printf(
-                                        '<a href="%s" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out" %s>
-                        <i class="%s"></i> %s
-                    </a>',
-                                        $item->url,
-                                        isset($item->onclick) ? '@click.prevent="' . $item->onclick . '"' : '',
-                                        $item->icon_url,
-                                        $item->name
-                                    );
-                                    ?>
-                            @else
-                                    <?php
-                                    printf(
-                                        '<span class="block px-4 py-2 text-sm text-gray-700 cursor-not-allowed">
-                        <i class="%s"></i> %s
-                    </span>',
-                                        $item->icon_url,
-                                        $item->name
-                                    );
-                                    ?>
+
+                            {{--                        @if (!$item->is_disabled)--}}
+                            {{--                        <?php--}}
+                            {{--                        printf(--}}
+                            {{--                            '<a href="%s" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500 transition duration-150 ease-in-out" %s>--}}
+                            {{--                        <i class="%s"></i> %s--}}
+                            {{--                    </a>',--}}
+                            {{--                            $item->url,--}}
+                            {{--                            isset($item->onclick) ? '@click.prevent="' . $item->onclick . '"' : '',--}}
+                            {{--                            $item->icon_url,--}}
+                            {{--                            $item->name--}}
+                            {{--                        );--}}
+                            {{--                        ?>--}}
+                            {{--                        @else--}}
+                            {{--                        <?php--}}
+                            {{--                        printf(--}}
+                            {{--                            '<span class="block px-4 py-2 text-sm text-gray-700 cursor-not-allowed">--}}
+                            {{--                        <i class="%s"></i> %s--}}
+                            {{--                    </span>',--}}
+                            {{--                            $item->icon_url,--}}
+                            {{--                            $item->name--}}
+                            {{--                        );--}}
+                            {{--                        ?>--}}
+                            {{--                        @endif--}}
+
+                            @if (!$item->is_disabled && $item->name != 'Log Out')
+                                @if (!$item->is_featured)
+                                    @if (strpos($item->name, 'Profile') !== false)
+                                        <x-dropdown-item href="/profile/{{ auth()->user()->id }}"
+                                                         :active="request()->is('profile/*')">
+                                            <i class="{{ $item->icon_url }}"></i> {{ $item->name }}
+                                        </x-dropdown-item>
+                                    @else
+                                        <x-dropdown-item href="{{ $item->url }}"
+                                                         :active="request()->is(ltrim($item->url, '/'))">
+                                            <i class="{{ $item->icon_url }}"></i> {{ $item->name }}
+                                        </x-dropdown-item>
+                                    @endif
+                                @endif
                             @endif
                         @endforeach
 
-                        <form id="logout-form" method="POST" action="/logout" class="hidden">
-                            @csrf
-                        </form>
-                    @else
-                        <a href="/register" class="text-xs font-bold uppercase text-gray-900">Register</a>
-                        <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>
-                        <a href="/contact-us">
-                            <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
-                        </a>
-                    @endauth
+                        @admin
+                        @foreach ($navItems as $item)
+                            @if ($item->is_featured && !$item->is_disabled && $item->name != 'Log Out')
+                                <x-dropdown-item href="{{ $item->url }}"
+                                                 :active="request()->is(ltrim($item->url, '/'))">
+                                    <i class="{{ $item->icon_url }}"></i> {{ $item->name }}
+                                </x-dropdown-item>
+                            @endif
+                        @endforeach
+                        @endadmin
+                        @if ($item->name == 'Log Out')
+                            <x-dropdown-item href="#" x-data="{}"
+                                             @click.prevent="document.querySelector('#logout-form').submit()">
+                                <i class="{{ $item->icon_url }}"></i> {{ $item->name }}
+                            </x-dropdown-item>
+                            <form id="logout-form" method="POST" action="/logout" class="hidden">
+                                @csrf
+                            </form>
+                        @endif
+                        @else
+                            <a href="/register" class="text-xs font-bold uppercase text-white">Register</a>
+                            <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>
+                            <a href="/contact-us">
+                                <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
+                            </a>
+                        @endauth
+                    </div>
                 </div>
-            </div>
         </div>
     </nav>
 
@@ -185,7 +230,7 @@
                 <span class="ml-2 text-sm">About Us</span>
             </a>
             <a href="/contact-us" class="flex items-center text-blue-500 hover:text-blue-600">
-                {{--                <i class="fas fa-phone fa-2x" style="color: dodgerblue;"></i>--}}
+                {{-- <i class="fas fa-phone fa-2x" style="color: dodgerblue;"></i>--}}
                 <span class="ml-2 text-sm">Contact Us</span>
             </a>
         </div>

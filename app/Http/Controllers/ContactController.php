@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ContactController extends Controller
 {
     public function index()
     {
-        return view('contact.contact-us');
+        $contacts = Contact::with('user')->get();
+        return view('contact.contact-us', compact('contacts'));
     }
+
 
     public function store(Request $request)
     {
