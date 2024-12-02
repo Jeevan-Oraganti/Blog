@@ -27,7 +27,7 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($posts as $post)
-                                <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-100' }}">
+                                <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm font-medium text-blue-500">
                                             <a href="/post/{{ $post->slug }}">{{ $post->title }}</a>

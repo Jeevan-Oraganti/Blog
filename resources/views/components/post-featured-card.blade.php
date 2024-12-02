@@ -38,7 +38,7 @@
                             class="w-10 h-10 rounded-full">
                     </div>
                     <div class="ml-3">
-                        <h5 class="font-bold text-gray-800">
+                        <h5 class="font-bold text-blue-500">
                             <a href="/?author={{ $post->author->username }}" class="hover:underline">{{ $post->author->name }}</a>
                         </h5>
                     </div>

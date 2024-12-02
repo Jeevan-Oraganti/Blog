@@ -5,32 +5,37 @@
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
 
-                        @if(session('warning'))
-                        <div id="warning-message" class="bg-yellow-500 text-white p-4 rounded mb-6">
-                            {{ session('warning') }}
-                        </div>
-                        <script>
-                            setTimeout(function() {
-                                document.getElementById('warning-message').style.display = 'none';
-                            }, 3000);
-                        </script>
-                        @endif
-
-                        @if(session('success'))
-                        <div id="success-message" class="bg-green-500 text-white p-4 rounded mb-6">
-                            {{ session('success') }}
-                        </div>
-                        <script>
-                            setTimeout(function() {
-                                document.getElementById('success-message').style.display = 'none';
-                            }, 3000);
-                        </script>
-                        @endif
-
-
                         <table class="min-w-full divide-y divide-gray-300">
+                            <thead>
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                    No.
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                    Profile
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                    Author
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                    Email
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                    No. of Posts
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                    Actions
+                                </th>
+                            </tr>
+                            </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                @foreach($users as $user)
+                            @foreach($users as $user)
                                 <tr>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-4">
@@ -39,7 +44,9 @@
                                     </td>
                                     <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="ml-7 flex-shrink-0">
-                                            <img src="{{ $user->profileImageUrl() ?? asset('images/default-profile.svg') }}" alt="Profile Image"
+                                            <img
+                                                src="{{ $user->profileImageUrl() ?? asset('images/default-profile.svg') }}"
+                                                alt="Profile Image"
                                                 class="w-10 h-10 rounded-full">
                                         </div>
                                     </td>
@@ -66,7 +73,7 @@
                                     </td>
                                     <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <a href="/admin/user/{{ $user->id }}/edit"
-                                            class="text-blue-500 hover:text-blue-600" title="Edit">
+                                           class="text-blue-500 hover:text-blue-600" title="Edit">
                                             <img
                                                 src="{{ asset('images/edit.svg') }}"
                                                 class="w-10 h-10 transition-all duration-300 ease-in-out transform hover:scale-110">
@@ -78,7 +85,7 @@
                                         @method('DELETE') -->
                                         <form method="GET" action="/admin/user/delete/{{ $user->id }}">
                                             <button type="submit" class="text-red-500 hover:text-red-600"
-                                                title="Delete">
+                                                    title="Delete">
                                                 <img
                                                     src="{{ asset('images/delete.svg') }}"
                                                     class="w-10 h-10 transition-all duration-300 ease-in-out transform hover:scale-110">
@@ -87,7 +94,7 @@
                                     </td>
                                     </td>
                                 </tr>
-                                @endforeach
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -99,39 +106,8 @@
             {{ $users->links() }}
         </div>
 
-        {{-- <div class="mt-6">--}}
-
-        {{-- <div class="flex items-center justify-end space-x-2">--}}
-        {{-- @if ($users->onFirstPage())--}}
-        {{-- <span class="text-gray-500 cursor-not-allowed">&laquo; Previous</span>--}}
-        {{-- @else--}}
-        {{-- <a href="{{ $users->previousPageUrl() }}" class="text-indigo-600 hover:text-indigo-700">«--}}
-        {{-- Previous</a>--}}
-        {{-- @endif--}}
-        {{-- <div class="flex relative justify-end -space-x-1.5">--}}
-        {{-- @foreach($users as $user)--}}
-        {{-- <div class="relative hover:border-blue-500">--}}
-        {{-- <img src="{{ $user->profileImageUrl() ?? asset('images/default-profile.svg')   }}" alt="{{ $user->name }}"--}}
-        {{-- class="w-8 h-8 rounded-full border-2 border-white object-cover transition-transform duration-200 ease-in-out hover:scale-110">--}}
-        {{-- </div>--}}
-        {{-- @endforeach--}}
-        {{-- </div>--}}
-        {{-- @foreach($users->links() as $link)--}}
-        {{-- <a href="{{ $link->url }}" class="w-10 h-10 rounded-full border-2 border-gray-300">--}}
-        {{-- <img src="{{ $link->user->profileImageUrl() ?? asset('images/default-profile.svg')  }}" alt="{{ $link->user->name }}"--}}
-        {{-- class="w-10 h-10 rounded-full object-cover">--}}
-        {{-- </a>--}}
-        {{-- @endforeach--}}
-
-        {{-- @if ($users->hasMorePages())--}}
-        {{-- <a href="{{ $users->nextPageUrl() }}" class="text-indigo-600 hover:text-indigo-700">Next »</a>--}}
-        {{-- @else--}}
-        {{-- <span class="text-gray-500 cursor-not-allowed">Next »</span>--}}
-        {{-- @endif--}}
-        {{-- </div>--}}
-        {{-- </div>--}}
-
-
     </x-setting>
+
+    <x-flash/>
 
 </x-layout>

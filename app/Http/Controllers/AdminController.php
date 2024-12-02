@@ -147,7 +147,7 @@ class AdminController extends Controller
         $user = User::where('id', $slug)->findorFail($slug);
 
         if ($user->posts()->count() > 0) {
-            return back()->with('warning', 'Cannot delete user. The user has associated posts.');
+            return back()->with('error', 'Cannot delete user. The user has associated posts.');
         }
 
         $user->delete();

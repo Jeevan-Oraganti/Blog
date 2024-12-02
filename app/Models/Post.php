@@ -54,7 +54,7 @@ class Post extends Model
 
     public function isLatest()
     {
-        return $this->updated_at->gt(Carbon::now()->subDays(1));
+        return $this->created_at->gt(Carbon::now()->subDays(1));
     }
 
     public function thumbnailUrl()

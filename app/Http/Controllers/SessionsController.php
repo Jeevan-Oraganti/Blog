@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Nette\Schema\ValidationException;
+use Illuminate\Validation\ValidationException;
 
 class SessionsController extends Controller
 {
@@ -20,8 +20,8 @@ class SessionsController extends Controller
         ]);
 
 
-        if (! auth()->attempt($attributes)) {
-            throw ValidationException::withMessage([
+        if (! \Auth::attempt($attributes)) {
+            throw ValidationException::withMessages([
                 'email' => 'Your provided credentials could not be verified'
             ]);
         }

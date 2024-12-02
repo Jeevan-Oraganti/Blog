@@ -26,7 +26,7 @@
                     <time>{{ $post->created_at->diffForHumans() }}</time>
                 </p>
                 <div class="flex items-center justify-end text-sm mt-4">
-                    <img src="/images/lary-avatar.svg" alt="Lary avatar" class="w-10 h-10 rounded-full">
+                    <img src="{{ $post->author->profileImageUrl() ?? asset('images/default-profile.svg') }}" alt="profile" class="w-10 h-10 rounded-full">
                     <div class="ml-3 text-left">
                         <h5 class="font-bold">
                             <a href="/?author={{ $post->author->username }}" class="hover:underline">{{ $post->author->name }}</a>
