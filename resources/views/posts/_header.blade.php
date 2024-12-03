@@ -5,17 +5,17 @@
             aria-hidden="true">
             <defs>
                 <pattern id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84" width="200" height="200" x="50%" y="-1"
-                         patternUnits="userSpaceOnUse">
-                    <path d="M.5 200V.5H200" fill="none"/>
+                    patternUnits="userSpaceOnUse">
+                    <path d="M.5 200V.5H200" fill="none" />
                 </pattern>
             </defs>
-            <rect width="100%" height="100%" stroke-width="0" fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)"/>
+            <rect width="100%" height="100%" stroke-width="0" fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" />
         </svg>
         <div
             class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48"
             aria-hidden="true">
             <div class="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
-                 style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"></div>
+                style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"></div>
         </div>
         <div class="overflow-hidden">
             <div class="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
@@ -23,20 +23,19 @@
                     <div class="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
                         <h1 class="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">Welcome to Our Blog,
                             @auth
-                                <span class="text-blue-500">{{ auth()->user()->name }} <span
-                                        class="text-6xl">😊</span></span>
-                                <div
-                                    class="h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 mt-6 animate-pulse"></div>
+                            <span class="text-blue-500">{{ auth()->user()->name }} <span
+                                    class="text-6xl">😊</span></span>
                         </h1>
-                        <h1 class="mt-6 text-5xl font-semibold tracking-tight text-gray-500 sm:text-2xl flex items-center">
-                            We're glad you are here. <span class="ml-2 animate-bounce">😇</span>
+                        <h1 class="mt-6 text-5xl font-semibold tracking-tight sm:text-2xl flex items-center">
+                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-yellow-500 to-red-500">
+                                We're glad you are here. </span><span class="ml-2 animate-bounce">😇</span>
                         </h1>
                         @else
-                            <span class="text-blue-500">Guest 🙋‍♂️</span>
-                            <h1 class="mt-6 text-2xl font-semibold tracking-tight text-gray-500 sm:text-2xl">Please <a
-                                    href="/login" class="text-blue-500">Login 🔑</a> to create Post.
-                                <span class="ml-2 animate-bounce">🤠</span>
-                            </h1>
+                        <span class="text-blue-500">Guest 🙋‍♂️</span>
+                        <h1 class="mt-6 text-2xl font-semibold tracking-tight text-gray-500 sm:text-2xl">Please <a
+                                href="/login" class="text-blue-500">Login 🔑</a> to create Post.
+                            <span class="ml-2 animate-bounce">🤠</span>
+                        </h1>
                         @endauth
                         <p class="mt-6 text-lg font-medium text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
                             Dive into a world of insightful articles 📝, tips 💡, and stories 📖. Our blog is your go-to
@@ -47,7 +46,7 @@
                         </p>
                         <div class="mt-10 flex items-center gap-x-6">
                             <a href="#posts"
-                               class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Explore
+                                class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Explore
                                 Posts 🔍</a>
                         </div>
                     </div>
@@ -100,20 +99,20 @@
 
     <div class="space-y-4 lg:space-y-0 lg:space-x-6 mt-6">
         <div class="relative lg:inline-flex bg-gray-100 rounded-full shadow-md px-4 py-2">
-            <x-category-dropdown/>
+            <x-category-dropdown />
         </div>
 
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-full shadow-md px-4 py-2">
             <form method="GET" action="/">
                 @if(request('category'))
-                    <input type="hidden" name="category" value="{{ request('category') }}">
+                <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
                 <input type="text"
-                       name="search"
-                       placeholder="Search for something... 🔍"
-                       class="bg-transparent text-black rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                       value="{{ request('search') }}">
+                    name="search"
+                    placeholder="Search for something... 🔍"
+                    class="bg-transparent text-black rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value="{{ request('search') }}">
             </form>
         </div>
     </div>
