@@ -21,16 +21,20 @@
 
 <section class="flex flex-col px-6 py-8 min-h-screen">
     <nav
-        class="md:flex md:justify-between md:items-center bg-gray-900 p-5 shadow-lg rounded-xl fixed top-3 left-3 right-3 z-50 bg-grey-700 backdrop-blur-sm transition-all duration-300">
+        class="bg-gray-900 p-5 shadow-lg rounded-xl fixed top-3 left-3 right-3 z-50 bg-grey-700 backdrop-blur-sm transition-all duration-300
+       sm:flex sm:justify-between sm:items-center
+       md:flex md:justify-between md:items-center
+       lg:flex lg:justify-between lg:items-center
+       xl:flex xl:justify-between xl:items-center">
 
         <div>
             <a href="/" class="home-icon ml-4">
-                <i class="fas fa-house fa-2x ml-4 text-blue-500 hover:text-blue-600"></i>
+                <i class="fas fa-house fa-2x text-blue-500 hover:text-blue-600"></i>
             </a>
         </div>
 
         @auth
-            <div class="flex items-center ml-40">
+            <div class="flex items-center">
                 <form method="GET" action="{{ url()->current() }}" class="relative ml-2">
                     @if(request('category'))
                         <input type="hidden" name="category" value="{{ request('category') }}">
@@ -45,60 +49,52 @@
         @endauth
 
         <div class="mt-8 md:mt-0 flex items-center mr-6">
-            <!-- @auth
-                <x-dropdown>
-                    <x-slot name="trigger">
-                        <div class="flex items-center mr-4">
-                            <img src="{{ auth()->user()->profileImageUrl() ?? asset('images/default-profile.svg') }}"
-                                alt="Profile Image"
-                                class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-xl object-cover transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer">
-                        </div>
-                    </x-slot>
+{{--            @auth--}}
+{{--                <x-dropdown>--}}
+{{--                    <x-slot name="trigger">--}}
+{{--                        <div class="flex items-center mr-4">--}}
+{{--                            <img src="{{ auth()->user()->profileImageUrl() ?? asset('images/default-profile.svg') }}"--}}
+{{--                                 alt="Profile Image"--}}
+{{--                                 class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-xl object-cover transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer">--}}
+{{--                        </div>--}}
+{{--                    </x-slot>--}}
 
-                    @admin
-                    <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
-                    <x-dropdown-item href="/admin/post/create" :active="request()->Is('admin/posts/create')">New Post
-                    </x-dropdown-item>
-                    <x-dropdown-item href="/admin/contacts">Contacts</x-dropdown-item>
-                    <x-dropdown-item href="/blog">Blog</x-dropdown-item>
-                    @endadmin
+{{--                    @admin--}}
+{{--                    <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="/admin/post/create" :active="request()->Is('admin/posts/create')">New Post--}}
+{{--                    </x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="/admin/contacts">Contacts</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="/blog">Blog</x-dropdown-item>--}}
+{{--                    @endadmin--}}
 
-                    <x-dropdown-item href="{{ route('user.posts') }}">All Posts</x-dropdown-item>
-                    <x-dropdown-item href="{{ route('posts.create') }}">New Post</x-dropdown-item>
-                    <x-dropdown-item href="/profile/{{ auth()->user()->id }}">My Profile</x-dropdown-item>
-                    <x-dropdown-item href="/subscription">Subscription</x-dropdown-item>
-                    <x-dropdown-item href="#" x-data="{}"
-                        @click.prevent="document.querySelector('#logout-form').submit()">Log Out
-                    </x-dropdown-item>
+{{--                    <x-dropdown-item href="{{ route('user.posts') }}">All Posts</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="{{ route('posts.create') }}">New Post</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="/profile/{{ auth()->user()->id }}">My Profile</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="/subscription">Subscription</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="#" x-data="{}"--}}
+{{--                                     @click.prevent="document.querySelector('#logout-form').submit()">Log Out--}}
+{{--                    </x-dropdown-item>--}}
 
-                    <form id="logout-form" method="POST" action="/logout" class="hidden">
-                        @csrf
-                </form>
-            </x-dropdown>
+{{--                    <form id="logout-form" method="POST" action="/logout" class="hidden">--}}
+{{--                        @csrf--}}
+{{--                    </form>--}}
+{{--                </x-dropdown>--}}
 
+{{--            @else--}}
 
+{{--                <a href="/register" class="text-xs font-bold uppercase text-gray-900">Register</a>--}}
+{{--                <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>--}}
+{{--                <a href="/contact-us">--}}
+{{--                    <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>--}}
+{{--                </a>--}}
 
-
-
-            @else
-
-                <a href="/register" class="text-xs font-bold uppercase text-gray-900">Register</a>
-                <a href="/login" class="ml-4 mr-4 text-xs text-blue-500 font-bold uppercase">Log In</a>
-                <a href="/contact-us">
-                    <i class="fa-solid fa-phone fa-1x ml-4 mr-4" style="color: dodgerblue;"></i>
-                </a>
-
-
-
-
-            @endauth -->
+{{--            @endauth--}}
 
             @auth
-
                 <div x-data="{ open: false }" @click.away="open = false" class="relative">
                     <button id="menu-toggle" @click="open = !open"
                             class="rounded-full text-xs font-semibold text-white uppercase transition duration-300 ease-in-out transform hover:scale-105">
-                        <div class="flex items-center mr-4">
+                        <div class="flex items-center">
                             <img src="{{ auth()->user()->profileImageUrl() ?? asset('images/default-profile.svg') }}"
                                  alt="Profile Image"
                                  class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-xl object-cover transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer">

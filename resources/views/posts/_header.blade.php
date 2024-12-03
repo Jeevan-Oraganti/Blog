@@ -23,10 +23,13 @@
                     <div class="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
                         <h1 class="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">Welcome to Our Blog,
                             @auth
-                                <span class="text-blue-500">{{ auth()->user()->name }}</span></h1>
-                        <h1 class="mt-6 text-5xl font-semibold tracking-tight text-gray-500 sm:text-2xl">We're glad
-                            you are
-                            here.</h1>
+                            <span class="text-blue-500">{{ auth()->user()->name }}</span>
+                            <div class="h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 mt-6 animate-pulse"></div>
+
+                        </h1>
+                        <h1 class="mt-6 text-5xl font-semibold tracking-tight text-gray-500 sm:text-2xl flex items-center">
+                            We're glad you are here. <span class="ml-2 animate-bounce">😇</span>
+                        </h1>
                         @else
                             <span class="text-blue-500">Guest</span>
                             <h1 class="mt-6 text-2xl font-semibold tracking-tight text-gray-500 sm:text-2xl">Please <a
@@ -45,7 +48,7 @@
                                 Posts</a>
                         </div>
                     </div>
-                    <div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
+                    <div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0 animate-pulse">
                         <div
                             class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
                             <div class="relative">
