@@ -23,32 +23,36 @@
                     <div class="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
                         <h1 class="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">Welcome to Our Blog,
                             @auth
-                            <span class="text-blue-500">{{ auth()->user()->name }}</span>
-                            <div class="h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 mt-6 animate-pulse"></div>
-
+                                <span class="text-blue-500">{{ auth()->user()->name }} <span
+                                        class="text-6xl">😊</span></span>
+                                <div
+                                    class="h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 mt-6 animate-pulse"></div>
                         </h1>
                         <h1 class="mt-6 text-5xl font-semibold tracking-tight text-gray-500 sm:text-2xl flex items-center">
                             We're glad you are here. <span class="ml-2 animate-bounce">😇</span>
                         </h1>
                         @else
-                            <span class="text-blue-500">Guest</span>
+                            <span class="text-blue-500">Guest 🙋‍♂️</span>
                             <h1 class="mt-6 text-2xl font-semibold tracking-tight text-gray-500 sm:text-2xl">Please <a
-                                    href="/login" class="text-blue-500">Login</a> to create Post. </h1>
+                                    href="/login" class="text-blue-500">Login 🔑</a> to create Post.
+                                <span class="ml-2 animate-bounce">🤠</span>
+                            </h1>
                         @endauth
                         <p class="mt-6 text-lg font-medium text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
-                            Dive
-                            into a world of insightful articles, tips, and stories. Our blog is your go-to source
-                            for
-                            the latest trends, expert advice, and inspiring content. Stay informed and entertained
-                            with
-                            our diverse range of posts.</p>
+                            Dive into a world of insightful articles 📝, tips 💡, and stories 📖. Our blog is your go-to
+                            source
+                            for the latest trends 🌟, expert advice 🎓, and inspiring content ✨. Stay informed 📰 and
+                            entertained 🎉 with
+                            our diverse range of posts.
+                        </p>
                         <div class="mt-10 flex items-center gap-x-6">
                             <a href="#posts"
                                class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Explore
-                                Posts</a>
+                                Posts 🔍</a>
                         </div>
                     </div>
-                    <div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0 animate-pulse">
+                    <div
+                        class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
                         <div
                             class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
                             <div class="relative">
@@ -91,7 +95,7 @@
 
 <header id="posts" class="max-w-2xl mx-auto text-center mt-16">
     <h1 class="text-5xl font-bold">
-        Discover the <span class="text-blue-500">Latest Posts</span> on Our Blog
+        Discover the <span class="text-blue-500">Latest Posts</span> on Our Blog 📅
     </h1>
 
     <div class="space-y-4 lg:space-y-0 lg:space-x-6 mt-6">
@@ -107,7 +111,7 @@
                 @endif
                 <input type="text"
                        name="search"
-                       placeholder="Search for something..."
+                       placeholder="Search for something... 🔍"
                        class="bg-transparent text-black rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                        value="{{ request('search') }}">
             </form>
